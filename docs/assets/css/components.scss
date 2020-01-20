@@ -33,11 +33,10 @@
 .links-section-cmp {
   min-height: 200px;
   width: 100%;
-  background: linear-gradient(107deg, #5b4de5 6%, #06a3ff 68%, #0dc0ef 98%);
   text-align: center;
-  padding-top: 250px;
+  padding-top: 90px;
   padding-bottom: 90px;
-  margin-top: -200px;
+  margin-top: -80px;
   position: relative;
 
   h2 {
@@ -84,9 +83,9 @@
 }
 
 .index-page .links-section-cmp {
-  padding-top: 300px;
+  padding-top: 90px;
   padding-bottom: 90px;
-  margin-top: -250px;
+  margin-top: -80px;
 
   .links-shapes-right {
     position: absolute;
@@ -224,4 +223,53 @@
     opacity: 1;
     transform: translate(-50%, 0px);
   }
+}
+
+//
+// VIDEO PLAYER
+// ----------------------------------------------
+.video-player {
+  position: relative;
+  cursor: pointer;
+
+  .btn-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -79px;
+    margin-left: -79px;
+  }
+  &:hover {
+    .frame {
+      opacity: 0.92;
+    }
+    .btn-video {
+      opacity: 0.72;
+    }
+  }
+}
+
+//
+// TABLES: basic-table-style
+// ----------------------------------------------
+.basic-table-style {
+  width: 100%;
+  font-size: $font-size-xs;
+
+  tr {
+
+    th, td {
+      border-bottom: 1px solid $gray-color-1;
+      padding: 3px;
+    }
+
+    th {
+
+    }
+
+    td {
+
+    }
+  }
+
 }

@@ -1,0 +1,45 @@
+<div id="twt__block-{{ include.name }}" class="test-with-terratest__block {{ include.class }}">
+
+  <div class="test-with-terratest__tabs" data-target="{{ include.name }}">
+    <div class="tab" data-target="#twt__code-{{ include.name }}-example">
+      <label>{{ include.example_name }}</label>
+      <span class="filename">{{ include.filename_example }}</span>
+    </div>
+    <div class="tab active" data-target="#twt__code-{{ include.name }}-test">
+      <label>Terratest test file</label>
+      <span class="filename">{{ include.filename_test }}</span>
+    </div>
+  </div>
+
+  <div
+    id="twt__code-{{ include.name }}-example"
+    class="test-with-terratest__code test-with-terratest__code--example"
+    data-target="{{ include.name }}"
+    data-type="example"
+    >
+    {% capture filename %}code-snippets/{{ include.name }}_example.html{% endcapture %}
+    {% include_relative {{ filename }} %}
+  </div>
+
+  <div
+    id="twt__code-{{ include.name }}-test"
+    class="test-with-terratest__code test-with-terratest__code--test active"
+    data-target="{{ include.name }}"
+    data-type="test"
+    >
+    {% capture filename_test %}code-snippets/{{ include.name }}_test.html{% endcapture %}
+    {% include_relative {{ filename_test }} %}
+  </div>
+
+  {% capture filename_desc %}descs/{{ include.name }}_desc.html{% endcapture %}
+  <div class="description">
+    {% include_relative {{ filename_desc }} %}
+  </div>
+
+
+  <div class="test-with-terratest__learn-more">
+    <span class="title">Learn more:</span>
+    {% capture filename_learn_more %}learn-more/{{ include.name }}.html{% endcapture %}
+    {% include_relative {{ filename_learn_more }} %}
+  </div>
+</div>

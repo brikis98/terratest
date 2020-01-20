@@ -4,41 +4,8 @@ title: Introduction
 category: getting-started
 excerpt: >-
   Terratest provides a variety of helper functions and patterns for common infrastructure testing tasks. Learn more about Terratest basic usage.
-excerpt_html: >-
-  <p>Empty</p>
-excerpt_md: >-
-  The basic usage pattern for writing automated tests with Terratest is to:
-
-  1.  Write tests using Go's built-in package testing: you create a file ending in
-      `_test.go` and run tests with the `go test` command.
-  1.  Use Terratest to execute your _real_ IaC tools (e.g., Terraform, Packer, etc.) to deploy _real_ infrastructure
-      (e.g., servers) in a _real_ environment (e.g., AWS).
-  1.  Validate that the infrastructure works correctly in that environment by making HTTP requests, API calls, SSH
-      connections, etc.
-  1.  Undeploy everything at the end of the test.
-
-    {:.bottom-wide-block}
-    ```go
-    terraformOptions := &terraform.Options {
-      // The path to where your Terraform code is located
-      TerraformDir: "../examples/terraform-basic-example",
-    }
-
-    // At the end of the test, run `terraform destroy` to clean up any resources that were created
-    defer terraform.Destroy(t, terraformOptions)
-
-    // This will run `terraform init` and `terraform apply` and fail the test if there are any errors
-    terraform.InitAndApply(t, terraformOptions)
-
-    // Validate your code works as expected
-    validateServerIsWor king(t, terraformOptions)
-    ```
 tags: ["basic-usage"]
 order: 100
-index_list:
-  no_hover_enlarge_effect: true
-  disable_card_link: true
-  read_more_btn: true
 nav_title: Documentation
 nav_title_link: /docs/
 ---
@@ -66,6 +33,18 @@ parallelism, retries, error handling, and static analysis, see the talk [Automat
 Packer, Kubernetes, and More](https://www.infoq.com/presentations/automated-testing-terraform-docker-packer/) and the
 blog post [Open sourcing Terratest: a swiss army knife for testing infrastructure
 code](https://blog.gruntwork.io/open-sourcing-terratest-a-swiss-army-knife-for-testing-infrastructure-code-5d883336fcd5).
+
+## Watch: “How to test infrastructure code”
+
+Yevgeniy Brikman talks about how to write automated tests for infrastructure code, including the code written for use with tools such as Terraform, Docker, Packer, and Kubernetes. Topics covered include: unit tests, integration tests, end-to-end tests, dependency injection, test parallelism, retries and error handling, static analysis, property testing and CI / CD for infrastructure code.
+
+This presentation was recorded at QCon San Francisco 2019: https://qconsf.com/.
+
+<iframe width="100%" height="450" allowfullscreen src="https://www.youtube.com/embed/xhHOW0EF5u8"></iframe>
+
+### Slides
+
+Slides to the video can be found here: [Slides: How to test infrastructure code](https://www.slideshare.net/brikis98/how-to-test-infrastructure-code-automated-testing-for-terraform-kubernetes-docker-packer-and-more){:target="\_blank"}.
 
 
 ## Basic usage

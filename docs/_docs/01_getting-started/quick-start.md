@@ -2,40 +2,12 @@
 layout: collection-browser-doc
 title: Quick start
 category: getting-started
-excerpt: Learn how to start with Terratest
-excerpt_html: >-
-  <p class='desc'>Making changes in infrastructure code can be difficult and terrifying.</p>
-  <p class='desc'>Unit tests, integration tests and end-to-end tests helps to make the code more reliable and improve confidence. But testing infrastructure code is difficult. Terratest provides a variety of helper functions and patterns for common infrastructure testing tasks.</p>
-  <p class='desc'>Learn  how to setup project, work with examples and become familiar with Terratest.</p>
-  <div class='tip-cta'>
-    <div class='tip-cta__tip-container'>
-      <span class='tip-cta__label'>TIP:</span>
-      <p class='tip-cta__tip'>The easiest way to get started is to use examples.</p>
-    </div>
-    <div class='tip-cta__cta-container'>
-      <button class='btn btn-primary btn-lg'>Start now</button>
-    </div>
-  </div>
-index_list:
-  no_hover_enlarge_effect: true
-  disable_card_link: true
-  read_more_btn: false
+excerpt: Learn how to start with Terratest.
 tags: ["quick-start"]
 order: 101
 nav_title: Documentation
 nav_title_link: /docs/
 ---
-
-## Introduction
-
-Infrastructure as code (IaC) tools such as Terraform, Packer, and Docker offer a number of advantages: you can automate your entire provisioning and deployment process, you can store the state of your infrastructure in code (instead of a sysadmin’s head), you can use version control to track the history of how your infrastructure has changed, and so on. But there’s a catch: maintaining a large codebase of infrastructure code is hard. Most IaC tools are immature, modern architectures are complicated, and seemingly minor changes to infrastructure code sometimes cause severe bugs, such as wiping out a server, a database, or even an entire data center.
-
-Here’s the hard truth: most teams are terrified of making changes to their infrastructure code.
-
-The goal of Terratest is to change that. Terratest is a Go library that makes it easier to write automated tests for your infrastructure code. I won’t claim that writing these tests is actually easy—it’s takes a considerable amount of work to get them just right—but it’s worth the effort, because these tests can run after every commit and verify that the code works as expected, thereby giving you the confidence to make the code changes you need.
-We developed Terratest at Gruntwork to help maintain the Infrastructure as [Code Library](https://gruntwork.io/infrastructure-as-code-library/), which contains over 250,000 lines of code written in Terraform, Go, Python, and Bash. This code is used in production by hundreds of companies, and Terratest is a big part of what makes it possible for our small team to maintain and support this codebase and our customers.
-
-Today, we’re happy to announce that we are open sourcing Terratest under the Apache 2.0 license! You can find [Terratest on GitHub](https://github.com/gruntwork-io/terratest).
 
 ## Requirements
 
@@ -90,7 +62,7 @@ To make this sort of testing easier, Terratest provides a variety of helper func
 ## Example #1: Terraform
 Let’s say you have the following (simplified) [Terraform](https://www.terraform.io/) code to deploy a web server in AWS (if you’re new to Terraform, check out our [Comprehensive Guide to Terraform](https://blog.gruntwork.io/a-comprehensive-guide-to-terraform-b3d32832baca)):
 
-```
+```go
 provider "aws" {
   region = "us-east-1"
 }
@@ -130,7 +102,7 @@ How can you test this code to be confident it works correctly? Well, let’s thi
 
 Using Terratest, you can write an automated test that performs the exact same steps! Here’s what the code looks like:
 
-```
+```go
 func TestWebServer(t *testing.T) {
   terraformOptions := &terraform.Options {
     // The path to where your Terraform code is located
@@ -154,7 +126,7 @@ func TestWebServer(t *testing.T) {
 
 The code above does all the steps we mentioned above, including running `terraform init`, `terraform apply`, making HTTP requests to the web server (retrying up to 15 times with 5 seconds between retries), and running `terraform destroy` (using [`defer`](https://blog.golang.org/defer-panic-and-recover) to run it at the end of the test, whether the test succeeds or fails). If you put this code in a file called `web_server_test.go`, you can run it by executing `go test`, and you’ll see output that looks like this (truncated for readability):
 
-```
+```bash
 $ go test -v
 === RUN   TestWebServer
 Running command terraform with args [init]
@@ -196,7 +168,7 @@ Success! Now, every time you make a change to this Terraform code, the test code
 
 The Terraform code in example #1 shoved all the web server code into User Data, which is fine for demonstration and learning purposes, but not what you’d actually do in the real world. For example, let’s say you wanted to run a [Node.js](https://nodejs.org/en/) app, such as the one below in `server.js`, which listens on port 8080 and responds to requests with “Hello, World”:
 
-```
+```js
 const http = require('http');
 const hostname = '0.0.0.0';
 const port = 8080;
@@ -212,7 +184,7 @@ server.listen(port, hostname, () => {
 
 How can you run this Node.js app on an EC2 Instance? One option is to use [Packer](https://www.packer.io/) to create a custom AMI that has this app installed. Here’s a Packer template that installs Node.js and `server.js` on top of Ubuntu:
 
-```
+```js
 {
   "builders": [{
     "ami_name": "node-example-{{isotime | clean_ami_name}}",
@@ -238,7 +210,7 @@ How can you run this Node.js app on an EC2 Instance? One option is to use [Packe
 
 If you put the code above into `web-server.json`, you can create an AMI by running `packer build web-server.json`:
 
-```
+```bash
 $ packer build web-server.json
 ==> amazon-ebs: Prevalidating AMI Name...
 ==> amazon-ebs: Creating temporary security group for instance...
@@ -253,7 +225,7 @@ us-east-1: ami-3505b64a
 
 At the end of your build, you get a new AMI ID. Let’s update the Terraform code from example #1 to expose an `ami_id` variable that lets you specify the AMI to deploy and update the User Data script to run the Node.js app:
 
-```
+```js
 provider "aws" {
   region = "us-east-1"
 }
@@ -294,7 +266,7 @@ So how can you test this Packer template and the Terraform code? Well, if you we
 
 Once again, you can automate this process with Terratest! To build the AMI using Packer and pass the ID of that AMI to Terraform as the `ami_id` variable, just add the following to the top of the test code from example #1:
 
-```
+```go
 packerOptions := &packer.Options {
     // The path to where the Packer template is located
     Template: "../web-server/web-server.json",

@@ -74,7 +74,6 @@ const docSidebarInitialExpand = function () {
   if (isException.length === 0) {
     toc.find('a[href="'+pathname+hash+'"]').each(function(i, nav) {
       $(nav).parents('ul').each(function(i, el) {
-        console.log('c', $(el), $(el).siblings('span.nav-collapse-handler'))
         $(el).collapse('show')
         $(el).siblings('span.nav-collapse-handler:not(.no-children)').removeClass('collapsed')
       })
@@ -88,10 +87,6 @@ function expandToByURL(url, parentFilter) {
   if ((window.location.pathname + window.location.hash).includes(url)) {
     const toc = $('#toc')
     var selector = 'a[href*="'+url+'"]'
-    // if (parentFilter) {
-    //   selector = 'ul[id*="'+parentFilter+'"] ' + selector
-    // }
-    console.log('expand by url', parentFilter, selector)
     toc.find(selector).each(function(i, nav) {
       $(nav).siblings('ul').collapse("show")
       $(nav).siblings('span.nav-collapse-handler:not(.no-children)').removeClass('collapsed')
@@ -105,7 +100,6 @@ function expandToByURL(url, parentFilter) {
 
 function expandToById(id) {
   const toc = $('#toc')
-  console.log('expand by id', id)
   toc.find('ul[id^="'+id+'"]').each(function(i, nav) {
     $(nav).parents('ul[id^="cat-nav-id"]').collapse("show")
     $(nav).collapse("show")

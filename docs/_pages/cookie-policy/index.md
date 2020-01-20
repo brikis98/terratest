@@ -9,7 +9,7 @@ classes: text-large subpage-top-spacing
 
 *Last Updated: December 12, 2019*
 
-Terragrunt website uses cookies and similar technologies when you visit our public websites such as <https://terragrunt.gruntwork.io> ("Website”). By using our website, you agree to our use of cookies.
+Terratest website uses cookies and similar technologies when you visit our public websites such as <https://terratest.gruntwork.io> ("Website”). By using our website, you agree to our use of cookies.
 
 # What are cookies?
 
@@ -33,7 +33,7 @@ These cookies are required for technical reasons in order for our Services to op
 
 ### Who Sets These Cookies:
 
-Terragrunt website (<https://terragrunt.gruntwork.io>)
+Terratest website (<https://terratest.gruntwork.io>)
 
 ### How To Opt Out of Them:
 

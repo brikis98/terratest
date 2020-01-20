@@ -112,9 +112,9 @@ body {
 .btn-sm, .btn-group-sm > .btn {
   height: 40px;
   border-radius: 30px;
-  padding: 5px 15px;
+  padding: 12px 15px;
   min-width: 100px;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 16px;
 }
 
@@ -255,11 +255,15 @@ body {
 //
 // CODE
 // -------------------------------------------------------
+code, pre {
+  border-color: $gray-color-1;
+}
+
 .code-snippet {
   font-family: 'Fira Mono', monospace;
 
   pre {
-    background: #f0f0f1;
+    background: $gray-color-1;
     border-width: 0px;
     border-radius: 10px;
     padding: 20px;
@@ -284,11 +288,20 @@ body {
 }
 
 pre[class*="language-"] {
-  background: #F5F3FD;
+  background: $gray-color-1;
+}
+
+
+code[class*="language-"], pre[class*="language-"]  {
+    line-height: 1.2;
+}
+
+code::selection, pre[class*="language-"]::selection, pre[class*="language-"] span::selection {
+  background: rgba(0,0,30,0.1) !important;
 }
 
 code.highlighter-rouge.language-plaintext {
-  background: #F5F3FD;
+  background: $gray-color-1;
   color: #5b4de5;
   border-radius: 4px;
   padding-left: 8px;
@@ -298,7 +311,8 @@ code.highlighter-rouge.language-plaintext {
 
 code {
   background: none;
-  color: whitesmoke;
+  color: $inline-code-color-base;
+  background: $inline-code-bg-color-base;
   font-size: 87%;
 }
 
@@ -314,15 +328,21 @@ p code, h1 code, h2 code, h3 code, h4 code, h5 code {
 // GRADIENTS
 // -------------------------------------------------------
 .gradient-primary.gradient-vertical, .sub-page .navbar-default, .index-page .section-hero, .section-bg-blue, .how-it-works .section-hero {
-  background: #4eb9fb;
-  background: -webkit-linear-gradient(top, #4eb9fb, #2683f5);
-  background: linear-gradient(to bottom, #4eb9fb, #2683f5);
+  background: $primary-gradient-start-color;
+  background: -webkit-linear-gradient(top, $primary-gradient-start-color, $primary-gradient-stop-color);
+  background: linear-gradient(to bottom, $primary-gradient-start-color, $primary-gradient-stop-color);
 }
 
-.gradient-primary.gradient-diagonal, .btn-primary {
-  background: #4eb9fb;
-  background: -webkit-linear-gradient(-45deg, #4eb9fb, #2683f5);
-  background: linear-gradient(135deg, #4eb9fb, #2683f5);
+.gradient-primary.gradient-diagonal {
+  background: $primary-gradient-start-color;
+  background: -webkit-linear-gradient(-45deg, $primary-gradient-start-color, $primary-gradient-stop-color);
+  background: linear-gradient(135deg, $primary-gradient-start-color, $primary-gradient-stop-color);
+}
+
+.btn-primary {
+  background: $secondary-gradient-start-color;
+  background: -webkit-linear-gradient(-45deg, $secondary-gradient-start-color, $secondary-gradient-stop-color);
+  background: linear-gradient(135deg, $secondary-gradient-start-color, $secondary-gradient-stop-color);
 }
 
 .gradient-primary-hover {
@@ -339,44 +359,6 @@ p code, h1 code, h2 code, h3 code, h4 code, h5 code {
   }
 }
 
-.gradient-info {
-  &.gradient-vertical {
-    background: #ff2b67;
-    background: -webkit-linear-gradient(top, #ff2b67, #ff5442);
-    background: linear-gradient(to bottom, #ff2b67, #ff5442);
-  }
-
-  &.gradient-diagonal {
-    background: #ff2b67;
-    background: -webkit-linear-gradient(-45deg, #ff2b67, #ff5442);
-    background: linear-gradient(135deg, #ff2b67, #ff5442);
-  }
-}
-.gradient-info-hover {
-  &.gradient-vertical {
-    background: #ff024a;
-    background: -webkit-linear-gradient(top, #ff024a, #ff2f19);
-    background: linear-gradient(to bottom, #ff024a, #ff2f19);
-  }
-
-  &.gradient-diagonal {
-    background: #ff024a;
-    background: -webkit-linear-gradient(-45deg, #ff024a, #ff2f19);
-    background: linear-gradient(135deg, #ff024a, #ff2f19);
-  }
-}
-.gradient-steel.gradient-vertical, .sub-page .section-hero {
-  background: #1a232d;
-  background: -webkit-linear-gradient(top, #1a232d, #2e3b4a);
-  background: linear-gradient(to bottom, #1a232d, #2e3b4a);
-}
-
-.gradient-steel.gradient-diagonal {
-  background: #1a232d;
-  background: -webkit-linear-gradient(-45deg, #1a232d, #2e3b4a);
-  background: linear-gradient(135deg, #1a232d, #2e3b4a);
-}
-
 //
 // GRIDS & SECTIONS
 // -------------------------------------------------------
@@ -384,6 +366,16 @@ p code, h1 code, h2 code, h3 code, h4 code, h5 code {
 .row-divider {
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.flex {
+  display: flex;
+}
+.align-items--stretch {
+  align-items: stretch;
+}
+.align-items--end {
+  align-items: flex-end;
 }
 
 @media (min-width: 768px) {
@@ -457,7 +449,9 @@ p code, h1 code, h2 code, h3 code, h4 code, h5 code {
 
 .index-page .section-hero {
   color: #fff;
-  background: linear-gradient(107deg, #5b4de5 6%, #06a3ff 68%, #0dc0ef 98%);
+  background: $primary-gradient-start-color;
+  background: -webkit-linear-gradient(-45deg, $primary-gradient-start-color, $primary-gradient-stop-color);
+  background: linear-gradient(135deg, $primary-gradient-start-color, $primary-gradient-stop-color);
 }
 
 @media (min-width: 768px) {
@@ -993,10 +987,32 @@ a.caret-right::after {
     }
   }
 
+  .copy-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 90px;
+    ul {
+      margin-left: 0;
+      margin-bottom: 0;
+      li {
+        display: inline-block;
+        margin-left: 0;
+        margin-bottom: 0;
+        line-height: 1;
+        margin-right: 20px;
+        a {
+          font-size: 12px;
+        }
+      }
+    }
+  }
   .footer__copyright {
-    margin-top: 20px;
     font-size: 12px;
+    margin-top: 2px;
     color: #fff;
+    opacity: 0.5;
+    line-height: 1;
   }
 }
 
@@ -1019,11 +1035,14 @@ a.caret-right::after {
           margin-left: 0px;
         }
       }
+
+      .copy-container {
+        ul {
+          flex-direction: row;
+        }
+      }
     }
 
-    .footer__copyright {
-      margin-top: 20px;
-    }
   }
 }
 
@@ -1038,6 +1057,19 @@ a.caret-right::after {
 
     .learn-col {
       margin-top: 30px;
+
+      .copy-container {
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 40px;
+        ul {
+          flex-direction: column;
+          li {
+            margin-bottom: 10px;
+            margin-right: 0;
+          }
+        }
+      }
     }
 
     .terragrunt-logo {

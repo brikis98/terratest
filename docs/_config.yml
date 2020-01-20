@@ -18,14 +18,14 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Terragrunt
-url: "https://terragrunt.gruntwork.io"
+title: Terratest
+url: "https://terratest.gruntwork.io"
 email: info@gruntwork.io
-name: "Terragrunt | Terraform wrapper"
+name: "Terratest | Automated tests for your infrastructure code."
 description: >- # this means to ignore newlines until "baseurl:"
-  Terragrunt is a thin wrapper for Terraform that provides extra tools for
-  keeping your Terraform configurations DRY, working with multiple Terraform
-  modules, and managing remote state.
+  Terratest is a Go library that provides patterns and helper functions for
+  testing infrastructure, with 1st-class support for Terraform, Packer, Docker,
+  Kubernetes, AWS, GCP, and more.
 baseurl: "/terratest" # the subpath of your site, e.g. /blog
 full_company_name: "Gruntwork, Inc"
 thumbnail_path: "/assets/img/terragrunt-thumbnail.png"

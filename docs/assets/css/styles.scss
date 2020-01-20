@@ -9,6 +9,7 @@
 @import "collection_browser";
 @import "custom_doc_cards";
 @import "subpage";
+@import "prism_custom";
 
 @import "pages/cookie-policy";
 @import "pages/home";
@@ -18,6 +19,6 @@
 
 body.index-page {
   .header-shapes-bottom {
-    background-image: url('{{ site.baseurl }}/assets/img/home/t-o-3@3x.png');
+    background-image: url('{{site.baseurl}}/assets/img/home/terratest_top_right.svg');
   }
 }

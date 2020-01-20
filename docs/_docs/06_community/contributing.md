@@ -144,7 +144,7 @@ to include the following:
 1. A description of the change, including a link to your GitHub issue.
 1. The output of your automated test run, preferably in a [GitHub Gist](https://gist.github.com/). We cannot run
    automated tests for pull requests automatically due to [security
-   concerns](https://circleci.com/docs/fork-pr-builds/#security-implications), so we need you to manually provide this
+   concerns](https://circleci.com/docs/2.0/oss/#security), so we need you to manually provide this
    test output so we can verify that everything is working.
 1. Any notes on backwards incompatibility or downtime.
 
