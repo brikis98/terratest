@@ -1,0 +1,14 @@
+---
+layout: collection-browser-doc
+title: GoDoc
+category: getting-started
+excerpt: >-
+  Browse Terratest methods and types in GoDoc.
+tags: ["packages"]
+order: 104
+nav_title: Documentation
+nav_title_link: /docs/
+---
+
+You can find the GoDoc for Terratest here: [https://godoc.org/github.com/gruntwork-io/terratest](https://godoc.org/github.com/gruntwork-io/terratest). This will let you see
+the methods and types within each package.

@@ -1,0 +1,255 @@
+---
+layout: collection-browser
+title: Examples
+subtitle: The best way to learn how to use Terratest is through examples.
+excerpt: The best way to learn how to use Terratest is through examples.
+permalink: /examples/
+slug: examples
+nav_title: Documentation
+nav_title_link: /docs/
+---
+
+<div class="main">
+  <div class="cb-section-white">
+
+    <div class="row">
+      <div class="container-cb-lg">
+        <div id="cb-doc-listings">
+          <div class="row equal">
+
+            {% assign data_scroll_after_selector = '.main' %}
+            {% assign data_scroll_until_selector = '#cb-doc-listings' %}
+            {% include collection_browser/_sidebar.html data_scroll_until_selector=data_scroll_until_selector data_scroll_after_selector=data_scroll_after_selector %}
+
+            <div class="col-xs-12 col-md-7 col-lg-9">
+              <div class="row">
+                <div class="cb-doc-listing js-scroll-spy" data-scroll-spy-nav-selector="#toc">
+
+                  <p>
+                    Check out below the list of examples with corresponding tests.
+                    To see some real-world examples of Terratest in action, check out
+                    some of our open source infrastructure modules.
+                  </p>
+                  <br/>
+
+                  <table class="basic-table-style">
+                    <thead>
+                      <tr>
+                        <th style="min-width: 200px;">Example</th>
+                        <th style="min-width: 200px;">Corresponding tests</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-basic-example/" target="_blank">Terraform Basic Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-basic-example-test/" target="_blank">terraform_basic_example_test.go</a></td>
+                        <td>A simple "Hello, World" Terraform configuration.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-http-example/" target="_blank">Terraform HTTP Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-http-example-test/" target="_blank">terraform_http_example_test.go</a></td>
+                        <td>A more complicated Terraform configuration that deploys a simple web server that responds to HTTP requests in AWS.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/packer-basic-example/" target="_blank">Basic Packer Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/packer-basic-example-test/" target="_blank">packer_basic_example_test.go</a></td>
+                        <td>A simple Packer template for building an Amazon Machine Image (AMI) or Google Cloud Platform Compute Image.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-packer-example/" target="_blank">Terraform Packer Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-packer-example-test/" target="_blank">terraform_packer_example_test.go</a></td>
+                        <td>A more complicated example that shows how to use Packer to build an AMI with a web server installed and deploy that AMI in AWS using Terraform.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-gcp-example/" target="_blank">Terraform GCP Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-gcp-example-test/" target="_blank">terraform_gcp_example_test.go</a></td>
+                        <td>A simple Terraform configuration that creates a GCP Compute Instance and Storage Bucket.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-remote-exec-example/" target="_blank">Terraform remote-exec example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-remote-exec-example-test/" target="_blank">terraform_remote_exec_example_test.go</a></td>
+                        <td>A terraform configuration that creates and AWS instance and then uses remote-exec to provision it.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/kubernetes-basic-example/" target="_blank">Kubernetes Basic example</a></td>
+                        <td>
+                          <a href="{{site.baseurl}}/examples/tests/kubernetes-basic-example-test/" target="_blank">kubernetes_basic_example_test.go</a>
+                          <a href="{{site.baseurl}}/examples/tests/kubernetes-basic-example-service-check-test/" target="_blank">kubernetes_basic_example_service_check_test.go</a>
+                        </td>
+                        <td>A minimal Kubernetes resource that deploys an addressable nginx instance.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/kubernetes-rbac-example/" target="_blank">Kubernetes RBAC example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/kubernetes-rbac-example-test/" target="_blank">kubernetes_rbac_example_test.go</a></td>
+                        <td>A Kubernetes resource config that creates a Namespace with a ServiceAccount that has admin permissions within the Namespace, but not outside.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/helm-basic-example/" target="_blank">Basic Helm Chart Example</a></td>
+                        <td>
+                          <a href="{{site.baseurl}}/examples/tests/helm-basic-example-template-test/" target="_blank">helm_basic_example_template_test.go</a>
+                          <a href="{{site.baseurl}}/examples/tests/helm-basic-example-integration-test/" target="_blank">helm_basic_example_integration_test.go</a>
+                        </td>
+                        <td>A minimal helm chart that deploys a Deployment resource for the provided container image.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/packer-docker-example/" target="_blank">Packer Docker Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/packer-docker-example-test/" target="_blank">packer_docker_example_test.go</a></td>
+                        <td>A Packer template that creates an Ubuntu AMI with a simple web app. This template also creates a Docker image with the same web app installed.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-asg-scp-example/" target="_blank">Terraform ASG SCP Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-scp-example-test/" target="_blank">terraform_scp_example_test.go</a></td>
+                        <td>A simple Terraform module that deploys resources in AWS to demonstrate how you can use Terratest to write automated tests for your AWS Terraform code.</td>
+                      </tr>
+
+
+                      <!-- Advanced: -->
+
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-aws-dynamodb-example/" target="_blank">Terraform AWS DynamoDB Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-aws-dynamodb-example-test/" target="_blank">terraform_aws_dynamodb_example_test.go</a></td>
+                        <td>A simple Terraform module that deploys a DynamoDB table with server-side encryption, point in time recovery and a TTL (time to live) attribute.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-aws-ecs-example/" target="_blank">Terraform AWS ECS Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-aws-ecs-example-test/" target="_blank">terraform_aws_ecs_example_test.go</a></td>
+                        <td>A simple Terraform module that deploys a simple ECS service in AWS.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-aws-example/" target="_blank">Terraform AWS Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-aws-example-test/" target="_blank">terraform_aws_example_test.go</a></td>
+                        <td>A simple Terraform module that deploys resources in AWS. This module deploys an EC2 Instance and gives that Instance a Name tag with the value specified in the instance_name variable.</td>
+                      </tr>
+
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-aws-network-example/" target="_blank">Terraform AWS Network Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-aws-network-example-test/" target="_blank">terraform_aws_network_example_test.go</a></td>
+                        <td>A Terraform module that deploys a simple network setup to demonstrate how you can use Terratest to write automated tests for your AWS Terraform code. This module deploys two subnets (public and private) within one availability zone.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-aws-rds-example/" target="_blank">Terraform AWS RDS Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-aws-rds-example-test/" target="_blank">terraform_aws_rds_example_test.go</a></td>
+                        <td>A simple Terraform module that deploys a database instance (MySQL by default) in AWS.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-aws-s3-example/" target="_blank">Terraform AWS S3 Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-aws-s3-example-test/" target="_blank">terraform_aws_s3_example_test.go</a></td>
+                        <td>This module deploys an S3 Bucket and gives that Bucket a Name & Environment tag with the value specified in the tag_bucket_name and tag_bucket_environment variables, respectively.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-azure-example/" target="_blank">Terraform Azure Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-azure-example-test/" target="_blank">terraform_azure_example_test.go</a></td>
+                        <td>A simple Terraform module that deploys a Virtual Machine in Azure and gives that VM a Name tag with the value specified in the vm_name variable.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-backend-example/" target="_blank">Terraform Backend Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-backend-example-test/" target="_blank">terraform_backend_example_test.go</a></td>
+                        <td>A simple Terraform module that demonstrates how you can use Terratest to configure a Terraform Backend at test time.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-gcp-ig-example/" target="_blank">Terraform GCP Managed Instance Group Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-gcp-ig-example-test/" target="_blank">terraform_gcp_ig_example_test.go</a></td>
+                        <td>A simple Terraform configuration that deploys an Instance Group in GCP.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-redeploy-example/" target="_blank">Terraform Redeploy Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-redeploy-example-test/" target="_blank">terraform_redeploy_example_test.go</a></td>
+                        <td>This module deploys an Auto Scaling Group (ASG) in the AWS region specified in the aws_region variable and a Load Balancer to route traffic across the ASG.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-ssh-example/" target="_blank">Terraform SSH Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-ssh-example-test/" target="_blank">terraform_ssh_example_test.go</a></td>
+                        <td>This module deploys two EC2 Instances, one with a public IP, one with a private IP, in the AWS region specified in the aws_region variable. The EC2 Instances allow SSH requests on the port specified by the ssh_port variable.</td>
+                      </tr>
+
+                      <tr>
+                        <td><a href="{{site.baseurl}}/examples/code-examples/terraform-ssh-password-example/" target="_blank">Terraform SSH Password Example</a></td>
+                        <td><a href="{{site.baseurl}}/examples/tests/terraform-ssh-password-example-test/" target="_blank">terraform_ssh_password_test.go</a></td>
+                        <td>The EC2 Instance allows SSH requests on the port specified by the ssh_port variable, and is configured with a user data script so that it will accept passwords for authentication.</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+
+
+                  <h2>Real-world examples</h2>
+                  <br/>
+
+                  <table class="basic-table-style">
+                    <thead>
+                      <tr>
+                        <th>Example</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td><a href="https://github.com/hashicorp/terraform-aws-consul" target="_blank">Consul</a></td>
+                        <td>
+                          The repo contains a set of modules for deploying a Consul cluster on AWS using Terraform.
+                          Consul is a distributed, highly-available tool that you can use for service discovery and key/value storage.<br/>
+                          Check <code>test</code> folder for Terratest tests.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><a href="https://github.com/hashicorp/terraform-aws-vault" target="_blank">Vault</a></td>
+                        <td>
+                          The repo contains a set of modules for deploying a Vault cluster on AWS using Terraform.
+                          Vault is an open source tool for managing secrets.<br/>
+                          Check <code>test</code> folder for Terratest tests.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><a href="https://github.com/hashicorp/terraform-aws-nomad" target="_blank">Nomad</a></td>
+                        <td>
+                          The repo contains a set of modules for deploying a Nomad cluster on AWS using Terraform.
+                          Nomad is a distributed, highly-available data-center aware scheduler.<br/>
+                          Check <code>test</code> folder for Terratest tests.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><a href="https://github.com/gruntwork-io/terraform-aws-couchbase/" target="_blank">Couchbase</a></td>
+                        <td>
+                          The repo contains a set of modules for deploying a Couchbase cluster on AWS using Terraform and Packer.
+                          Couchbase is a distributed NoSQL document database.<br/>
+                          Check <code>test</code> folder for Terratest tests.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
