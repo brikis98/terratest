@@ -156,6 +156,7 @@
           {% comment %}
             ======================= B4: CATEGORY NAME TO NAV =======================
           {% endcomment %}
+          {% if n_category.name != '' %}
           {% capture my_toc %}{{ my_toc }}
 {{ n_cat_space }}- <span
   class='nav-collapse-handler category-head collapsed'
@@ -166,7 +167,8 @@
   aria-controls='{{ col_id }}-{{ cat_id }}'>
 <span class='arrow-icon glyphicon glyphicon-triangle-bottom'></span>
 </span>[{{ n_category.name | replace: '-',' ' | replace: '%20', ' ' | capitalize }}]({{ site.baseurl }}/{{ n_collection_name | slugify }}#{{n_category.name}}){% endcapture %}
-
+          {% endif %}
+          
           {% comment %}
             ======================= B5: DOCS LOOP =======================
           {% endcomment %}

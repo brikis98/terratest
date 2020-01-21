@@ -59,8 +59,6 @@ When you work with the documentation, it's good to preview the changes. To do th
 2. [B) Add a new page](#add-a-new-page)
 3. [C) Remove or rename page](#remove-or-rename-page)
 4. [D) Add custom redirection](#add-custom-redirection)
-5. [Update navigation](#update-navigation)
-  5.1 [Navigation partials](#navigation-partials)
 
 ## A) Change content on the existing page
 
@@ -126,7 +124,7 @@ order: 301
 
 The navigation sidebar is built in `_includes/collection_browser/navigation/_collection_toc.html`.
 
-First, the script groups documents of the given collection by categories. The categories makes the uppermost level in the navigation sidebar.
+First, the script groups documents of the given collection by categories. Categories make the uppermost level in the navigation sidebar.
 Then, within each category, the script adds documents titles to the navigation under specific categories. Documents are sorted by `order` field set in frontmatter section.
 Next, headings from each document are being extracted and added to the navigation.
 
@@ -330,7 +328,7 @@ Javascript files used by  Collection Browser:
 
 #### Navigation Sidebar
 
-The navigation sidebar is built in `_includes/collection_browser/navigation/_collection_toc.html`. Read more: see: [Navigation](#navigation)
+The navigation sidebar is built in `_includes/collection_browser/navigation/_collection_toc.html`. Read more: [Navigation](#navigation)
 
 ## Markdown (md) > AsciiDoc (adoc) converter
 
