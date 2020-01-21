@@ -6,7 +6,7 @@ excerpt: >-
   Since automated tests with Terratest deploy real resources into real environments, you'll want to make sure your tests
   always cleanup after themselves.
 tags: ["testing-best-practices", "clean", "terraform-destroy", "terraform-apply"]
-order: 404
+order: 204
 nav_title: Documentation
 nav_title_link: /docs/
 ---

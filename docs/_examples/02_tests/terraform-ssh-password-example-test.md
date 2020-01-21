@@ -11,7 +11,7 @@ nav_title: Examples
 nav_title_link: /examples/
 ---
 
-Full source code can be found here: [terraform_ssh_password_test.go](https://github.com/gruntwork-io/terratest/blob/master/test/terraform_ssh_password_test.go).
+Full source code can be found here: [terraform_ssh_password_test.go](https://github.com/gruntwork-io/terratest/blob/master/test/terraform_ssh_password_example_test.go).
 
 Check out the corresponding example: [Terraform SSH Password Example]({{site.baseurl}}/examples/code-examples/terraform-ssh-password-example/).
 

@@ -5,7 +5,7 @@ category: testing-best-practices
 excerpt: >-
   Learn more about `terratest_log_parser`.
 tags: ["testing-best-practices", "logger"]
-order: 406
+order: 206
 nav_title: Documentation
 nav_title_link: /docs/
 ---

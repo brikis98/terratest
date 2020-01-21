@@ -11,8 +11,7 @@ nav_title: Examples
 nav_title_link: /examples/
 ---
 
-Backend](https://www.terraform.io/docs/backends/) at test time. This module doesn't really do anything other than set
-up S3 as a backend, and allow Terratest to fill in that backend's configuration.
+A simple Terraform module that demonstrates how you can use Terratest to configure a [Backend](https://www.terraform.io/docs/backends/) at test time. This module doesn't really do anything other than set up S3 as a backend, and allow Terratest to fill in that backend's configuration.
 
 Check out [terraform_backend_example_test.go]({{ site.baseurl }}/examples/tests/terraform-backend-example-test/) to see how you can write
 automated tests for this module.

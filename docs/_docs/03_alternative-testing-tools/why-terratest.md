@@ -5,7 +5,7 @@ category: alternative-testing-tools
 excerpt: >-
   Are you wondering why you should use Terratest?
 tags: ["tools"]
-order: 500
+order: 300
 nav_title: Documentation
 nav_title_link: /docs/
 ---

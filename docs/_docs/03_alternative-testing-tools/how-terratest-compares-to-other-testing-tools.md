@@ -6,7 +6,7 @@ excerpt: >-
   Comparing to other testing tools, Terratest doesn't check individual properties only. The question we're trying to answer is, "does the
   infrastructure actually work?"
 tags: ["tools"]
-order: 501
+order: 301
 nav_title: Documentation
 nav_title_link: /docs/
 ---

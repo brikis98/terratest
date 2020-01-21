@@ -13,7 +13,7 @@ nav_title_link: /examples/
 
 Full source code can be found here: [terraform_scp_example_test.go](https://github.com/gruntwork-io/terratest/blob/master/test/terraform_scp_example_test.go).
 
-Check out the corresponding example: [Terraform SCP Example]({{site.baseurl}}/examples/code-examples/terraform-scp-example/).
+Check out the corresponding example: [Terraform SCP Example]({{site.baseurl}}/examples/code-examples/terraform-asg-scp-example/).
 
 ## Source code
 

@@ -5,7 +5,7 @@ category: alternative-testing-tools
 excerpt: >-
   See other infrastructure testing tools you may wish to use in addition to Terratest.
 tags: ["tools"]
-order: 500
+order: 300
 nav_title: Documentation
 nav_title_link: /docs/
 ---

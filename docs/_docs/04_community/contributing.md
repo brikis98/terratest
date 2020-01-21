@@ -5,7 +5,7 @@ category: Community
 excerpt: >-
   Terratest is an open source project, and contributions from the community are very welcome!
 tags: ["contributing", "community"]
-order: 600
+order: 400
 nav_title: Documentation
 nav_title_link: /docs/
 ---
@@ -106,6 +106,8 @@ We recommend updating the documentation *before* updating any code (see [Readme 
 Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html)). This ensures the documentation
 stays up to date and allows you to think through the problem at a high level before you get lost in the weeds of
 coding.
+
+The documentation is built with Jekyll and hosted on the Github Pages from `docs` folder on `master` branch. Check out [Terratest website](https://github.com/gruntwork-io/terratest/tree/master/docs#working-with-the-documentation) to learn more about working with the documentation.
 
 ### Update the tests
 

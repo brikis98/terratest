@@ -5,7 +5,7 @@ category: testing-best-practices
 excerpt: >-
   Since Go 1.10, test results are automatically cached. See how to turn off caching test results.
 tags: ["testing-best-practices", "cache"]
-order: 407
+order: 207
 nav_title: Documentation
 nav_title_link: /docs/
 ---

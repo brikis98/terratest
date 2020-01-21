@@ -23,9 +23,9 @@ types of infrastructure code you can test (e.g., Packer, Kubernetes, etc).
 
 1. Create an `examples` and `test` folder.
 
-1. Copy all the files from the [basic terraform example]({{site.baseurl}}/examples/infrastructure-as-code-examples/basic-terraform/) into the `examples` folder.
+1. Copy all the files from the [basic terraform example]({{site.baseurl}}/examples/code-examples/terraform-basic-example/) into the `examples` folder.
 
-1. Copy the [basic terraform example test]({{site.baseurl}}/examples/example-tests/terraform-basic-example-test/) into the `test` folder.
+1. Copy the [basic terraform example test]({{site.baseurl}}/examples/tests/terraform-basic-example-test/) into the `test` folder.
 
 1. To configure dependencies, run:
 
@@ -288,8 +288,8 @@ And that’s it! The rest of the test code is exactly the same. When you run `go
 ## Give it a shot!
 
 The above is just a small taste of what you can do with [Terratest](https://github.com/gruntwork-io/terratest). To learn more:
-1. Check out the [examples]({{site.baseurl}}/examples/#infrastructure-as-code-examples) and the corresponding automated tests for those examples in the [tests]({{site.baseurl}}/examples/#example-tests) for fully working (and tested!) sample code.
-1. Browse through the list of [Terratest packages]({{site.baseurl}}/docs/packages/packages-overview/) to get a sense of all the tools available in Terratest.
+1. Check out the [examples]({{site.baseurl}}/examples/) and the corresponding automated tests for those examples for fully working (and tested!) sample code.
+1. Browse through the list of [Terratest packages]({{site.baseurl}}/docs/getting-started/packages-overview/) to get a sense of all the tools available in Terratest.
 Read our Testing Best Practices Guide.
 1. Check out real-world examples of Terratest usage in our open source infrastructure modules: [Consul](https://github.com/hashicorp/terraform-aws-consul), [Vault](https://github.com/hashicorp/terraform-aws-vault), [Nomad](https://github.com/hashicorp/terraform-aws-nomad).
 

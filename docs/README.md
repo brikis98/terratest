@@ -1,18 +1,18 @@
-# Terragrunt website
+# Terratest website
 
-This is the code for the [Terragrunt website](https://terragrunt.gruntwork.io).
+This is the code for the [Terratest website](https://terratest.gruntwork.io).
 
-Terragrunt website is built with Jekyll and published on Github Pages from `docs` folder on `master` branch.
+Terratest website is built with Jekyll and published on Github Pages from `docs` folder on `master` branch.
 
 # Quick Start
 
 ## Download project
 
-Clone or fork Terragrunt [repository](https://github.com/gruntwork-io/terragrunt).
+Clone or fork Terratest [repository](https://github.com/gruntwork-io/terratest).
 
 ## Run
 
-1. Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/). Version 2.4 or above is recommended. 
+1. Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/). Version 2.4 or above is recommended.
    Consider using [rbenv](https://github.com/rbenv/rbenv) to manage Ruby versions.
 
 2. Install `bundler`:
@@ -41,7 +41,7 @@ Clone or fork Terragrunt [repository](https://github.com/gruntwork-io/terragrunt
 
 # Deployment
 
-GitHub Pages automatically rebuilds the website from the `/docs` folder whenever you commit and push to the `master` 
+GitHub Pages automatically rebuilds the website from the `/docs` folder whenever you commit and push changes to the `master`
 branch.
 
 # Working with the documentation
@@ -51,7 +51,7 @@ Development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.
 stays up to date and allows you to think through the problem at a high level before you get lost in the weeds of
 coding.
 
-The Terragrunt website contains two collections: *Documentation* and *Use cases*. They are stored respectively in `_docs` and `_use-cases` directories.
+The Terratest website contains two collections: *Docs* and *Examples*. They are stored respectively in `_docs` and `_examples` directories.
 
 When you work with the documentation, it's good to preview the changes. To do that, run project as it is described in [Run section](#run).
 
@@ -64,13 +64,12 @@ When you work with the documentation, it's good to preview the changes. To do th
 
 ## A) Change content on the existing page
 
-1. Find page in `_docs` or `_use-cases` by file name (it's the same as page's title).
-2. Edit content.
-3. If you changed, added or removed the file title or any heading, [update navigation](#updating-navigation).
+1. Find page in `_docs` or `_examples` by file name (it's the same as page's title).
+2. Edit content and save file.
 
 ## B) Add a new page
 
-1. Create a new file in `_docs` or `_use-cases`. The file's name and title have to be the same.
+1. Create a new file in `_docs` or `_examples`. The file's name and title have to be the same.
 2. At the beginning of the file, add:
 
 ```
@@ -79,7 +78,7 @@ layout: collection-browser-doc                  # X Cannot be changed
 title: Quick start                              # <--- Change this
 categories:
   - getting-started                             # <--- Change this if needed
-excerpt: Learn how to start with Terragrunt.    # <--- Change page description
+excerpt: Learn how to work with Terratest.      # <--- Change page description
 tags: ["Quick Start", "DRY", "backend", "CLI"]  # <--- Set tags
 order: 100                                      # <--- It sorts the docs on the list
 nav_title: Documentation
@@ -88,9 +87,9 @@ nav_title_link: /docs/
 
 ```
 
-* `layout` - do not change!
+* `layout` - do not change! (Layout sets components like a navigation sidebar, page header, footer, etc.)
 * `title` - document title
-* `categories` - the document's category. Three categories are in use for now: "getting-started", "features", and "community".
+* `categories` - the document's category. Four categories are in use for now: "getting-started", "testing-best-practices", "alternative-testing-tools", and "community".
 * `excerpt` - description. Try to keep it short.
 * `tags` - check other posts to see common tags, but you can set a new as well.
 * `order` - it is used to sort the documents within collection.
@@ -98,17 +97,17 @@ nav_title_link: /docs/
 * `nav_title_link` - it is URL. If it is set, the `nav_title` becomes a link with a given URL.
 
 3. Add content at the end of the file.
-4. Add new item in the navigation. See more: [Update navigation](#updating-navigation).
+4. If it is another example, you may want to add it to the table on the `/examples/` subpage. Open `_pages/examples/index.html` and add a new row in the table (`<tr>`).
 
 ## C) Remove or rename page
 
-1. Find page in `_docs` or `_use-cases` by file name (it's the same as page's title).
+1. Find page in `_docs` or `_examples` by file name (it's the same as page's title).
 2. Delete page or rename.
-3. Remove related item from the navigation, or update its name and href (link to the page). See more: [Update navigation](#updating-navigation).
+3. If it is an `examples`, remove or rename corresponding table's row in `_pages/examples/index.html`.
 
 ## D) Add custom redirection
 
-To add link to any page, including subpages outside of any collection, you can create a new file in specific collection (`_docs` or `_use-cases`), and set following content in the file:
+To add link to any page, including subpages outside of any collection, you can create a new file in specific collection (`_docs` or `_examples`), and set following content in the file:
 
 ```
 ---
@@ -122,45 +121,25 @@ order: 301
 ---
 ```
 
-Then add the item to navigation in the same way as when adding a new file.
 
-## Update navigation
+## Navigation
 
-The navigation sidebar is defined in `_data/navigation.yml`. Each item contains:
+The navigation sidebar is built in `_includes/collection_browser/navigation/_collection_toc.html`.
 
-* `name` - text displayed on the website
-* `href` - link to the subpage
-* `children` - (optional) list of nested navigation tabs
+First, the script groups documents of the given collection by categories. The categories makes the uppermost level in the navigation sidebar.
+Then, within each category, the script adds documents titles to the navigation under specific categories. Documents are sorted by `order` field set in frontmatter section.
+Next, headings from each document are being extracted and added to the navigation.
 
-To add, edit or delete a navigation item:
-1. Open `_data/navigation.yml` (or partial).
-2. Find item on the list.
-3. To...
-  3.1 ...remove item, delete its `name`, `href` and `children`.
-  3.2 ...edit item, change its `name`, `href` or `children`.
-  3.3 ...add item, create add `name`, `href` and `children` (optional) under specific children.
-
-
-### Navigation partials
-
-You can create partial navigation, like `navigation-use-cases.yml` and `navigation-use-cases-no-children.yml`. Partials are included under `children` with:
-
-```
-children:
-  - include_nav: navigation-use-cases
-```
+The Collection Browser allows to embed another collection. To do that, add a new file within the main collection and set: `as_nested_collection`, `as_nested_collection_link`.
+To learn more about embedding collections, check out how `examples` collection is injected into `docs` collection. It is done with one file: `_docs/01_getting-started/examples.md`.
 
 
 # Development
 
 ## Project structure
 ```
-|-- _data                     # data files
-| |-- navigation.yml          # the navigation sidebar for documentation & use cases
-| |-- navigation-use-cases.yml              # partial included in navigation.yml
-| |-- navigation-use-cases-no-children.yml  # partial included in navigation.yml
-|
 |-- _docs                     # docs *collection*
+|-- _examples                 # examples *collection*
 |-- _includes                 # partials
 |-- _layouts                  # layouts
 |-- _pages                    # static pages
@@ -168,12 +147,10 @@ children:
 | |-- cookie-policy           # "Cookie Policy" page
 | |-- docs                    # index page for *_docs* collection
 | |-- index                   # home page
-| |-- support                 # "Support" page
-| |-- use-cases               # index page for *_use-cases* collection
+| |-- examples                # index page for *_examples* collection
 |
 |-- _posts                    # Posts collection - empty and not used
 |-- _site                     # website generated by Jekyll
-|-- _use-cases                # use-cases *collection*
 |-- assets                    # Javascript, Stylesheets, and images
 |-- scripts                   # useful scripts to use in development
 | |-- convert_md_to_adoc      # contains the command to convert MD files to ADOC
@@ -182,27 +159,27 @@ children:
 |-- _config.yml               # Jekyll configuration file
 ```
 
-## Documentation and Use Cases collections
+## Documentation and Examples collections
 
-The [*documentation*](https://terragrunt.gruntwork.io/docs) and [*use cases*](https://terragrunt.gruntwork.io/use-cases) are implemented as Jekyll collections, and both are built with [*Collection Browser*](#collection-browser).
+The [*documentation*](https://terratest.gruntwork.io/docs) and [*examples*](https://terratest.gruntwork.io/examples) are implemented as Jekyll collections, and both are built with [*Collection Browser*](#collection-browser).
 
 ### Documentation collection
 
-The index page of the *Documentation* collection is in: `_pages/docs/index.html` and is available under `/docs` URL. It uses *Collection browser* from `_includes/collection_browser/browser` which makes the list of docs, adds search input with tag filter and puts navigation sidebar containing collection's categories.
+The index page of the *Docs* collection is in: `_pages/docs/index.html` and is available under `/docs` URL. It uses *Collection browser* from `_includes/collection_browser/browser` which makes the list of docs, adds search input with tag filter and puts navigation sidebar containing collection's categories.
 
 Collection is stored in `_docs` folder.
 
-### Use Cases collection
+### Examples collection
 
-The index page of the *Use cases* collection is in: `_pages/use-cases/index.html` and is available under `/use-cases` URL. It uses *Collection browser* from `_includes/collection_browser/browser` which makes the list of docs, adds search input with tag filter and puts navigation sidebar containing collection's categories.
+The index page of the *Examples* collection is in: `_pages/examples/index.html` and is available under `/examples` URL. The collection's index page is built in `_pages/examples/index.html`. The *Collection browser* from `_includes/collection_browser/browser` is used to build a _show_ page of each document within a collection.
 
-Collection is stored in `_use-cases` folder.
+Collection is stored in `_examples` folder.
 
-## Adding new docs to collections
+## Adding new pages to collections
 
-The *Documentation* and *Use cases* collection uses *collection browser* which requires to setup proper meta tags in the doc file.
+The *Docs* and *Examples* collections uses *collection browser* which requires to setup proper meta tags in the doc file.
 
-1. Create a new file in collection folder. *Documentation* add to the `_docs`, and *Use cases* add to `_use-cases`.
+1. Create a new file in collection folder. *Docs* add to the `_docs`, and *Examples* add to `_examples`.
 ```
 ---
 layout: collection-browser-doc
@@ -210,7 +187,7 @@ title: CLI options  # CHANGE THIS
 categories:
   - getting-started # CHANGE THIS
 excerpt: >- # CHANGE THIS
-  Terragrunt forwards all arguments and options to Terraform. Learn more about CLI options in Terragrunt.
+  Terratest example description
 tags: ["CLI"] # CHANGE THIS
 order: 102 # CHANGE THIS
 nav_title: Documentation # OPTIONAL
@@ -227,11 +204,11 @@ nav_title_link: /docs/ # OPTIONAL
 * nav_title - the title above navigation. It's optional. It's a link if `nav_title_link` is set.
 * nav_title_link - it is a URL. If it is set, `nav_link` is transformed to the link.
 
-2. Update navigation: [Navigation](#navigation)
+2. If you added a new `example`, you may want to add it to the list of examples on main `/examples` subpage. To do that, open `_pages/examples/index.html` and add a new row in table.
 
 ## Adding new collections
 
-To add a new collection based on *Collection browser*, like *Documentation* and *Use Cases* collections:
+To add a new collection based on *Collection browser*, like *Docs* and *Examples* collections:
 
 1. Add collection to the `_config.yml`:
 ```
@@ -249,19 +226,18 @@ collections:
 ---
 layout: collection-browser # DO NOT CAHNGE THIS
 title: Use cases
-subtitle: Learn how to integrate Terragrunt with Terraform.
-excerpt: Learn how to integrate Terragrunt with Terraform.
-permalink: /use-cases/
-slug: use-cases
+subtitle: Learn how to work with Terratest.
+excerpt: Learn how to work with Terratest.
+permalink: /examples/
+slug: examples
 nav_title: Documentation # OPTIONAL
 nav_title_link: /docs/ # OPTIONAL
 ---
 
-{% include collection_browser/browser.html collection=site.use-cases collection_name='use-cases' %}
+{% include collection_browser/browser.html collection=site.examples collection_name='examples' %}
 ```
 6. Change `title`, `subtitle`, `excerpt`, `permalink`, and `slug` in meta tags.
 7. In `include` statement, set `collection` to your collection set in `_config.yml` and set `collection_name`.
-8. Update navigation in `_data/navigation.yml`(see: [Navigation](#navigation))
 
 
 ## Collection Browser
@@ -269,8 +245,9 @@ nav_title_link: /docs/ # OPTIONAL
 _The Collection Browser is strongly inspired by implementation of `guides` on *gruntwork.io* website._
 
 The Collection Browser's purpose is to wrap Jekyll collection into:
-* _index_ page containing ordered list of docs with search form
-* _show_ pages presenting docs' contents, and containing navigation sidebar.
+* _index_ page containing ordered list of docs with search form,
+* _show_ pages presenting docs' contents, and containing navigation sidebar,
+* and build navigation sidebar.
 
 ### Usage
 
@@ -283,7 +260,7 @@ collections:
     permalink: /:collection/:categories/:title/  # --> You can adjust this to your needs. You can remove ":categories" if your collection doesn't use it.
 ```
 2. Create a folder for collection in root directory: `_my-collection`
-3. Add documents (`.adoc` format is recommended) to the `_my-collection` folder.
+3. Add documents (`.md` format is recommended) to the `_my-collection` folder.
 4. In each document add:
 ```
 ---
@@ -292,7 +269,7 @@ title: CLI options              # <-- [CHANGE THIS] doc's title
 categories:                     # <-- [CHANGE THIS] use single category. (Downcase and dashes instead of spaces)
   - getting-started
 excerpt: >-                     # <-- [CHANGE THIS] doc's description
-  Terragrunt forwards all arguments and options to Terraform. Learn more about CLI options in Terragrunt.
+  Some description.
 tags: ["CLI", "Another tag"]    # <-- [CHANGE THIS] doc's tags
 order: 102                      # <-- [CHANGE THIS] set different number to each doc to set right order
 ---
@@ -303,8 +280,8 @@ order: 102                      # <-- [CHANGE THIS] set different number to each
 ---
 layout: collection-browser         # <-- It has to be "collection-browser"
 title: Use cases
-subtitle: Learn how to integrate Terragrunt with Terraform.
-excerpt: Learn how to integrate Terragrunt with Terraform.
+subtitle: Learn how to work with Terratest.
+excerpt: Learn how to work with Terratest.
 permalink: /use-cases/
 slug: use-cases
 ---
@@ -322,7 +299,7 @@ The _index_ page displays the list of collection's docs. Clicking on any of them
 
 #### config.yml
 
-Collections are registred in the `_config.yml` file like other typical Jekyll collections.
+Collections are registered in the `_config.yml` file like other typical Jekyll collections.
 Additional field used in the configuration is: `sort_by: order`. It ensures that collection's documents are displayed in the right order.
 The `order` is set then in every collection document. For large collections it's recommended to split files into several folders, and then to use 3-digit numbers. So each folder would have reserved range of numbers, like: `100 - 199`, `200-299`, etc. It makes easy to add new documents without overwriting `order` fields in other docs.
 
@@ -353,31 +330,7 @@ Javascript files used by  Collection Browser:
 
 #### Navigation Sidebar
 
-The navigation sidebar is defined in `_data/navigation.yml`. Read more: see: [Navigation](#navigation)
-
-## Navigation
-
-The navigation sidebar is defined in `_data/navigation.yml`. Each navigation tab contains:
-
-* name - text displayed on the website
-* href - link to the subpage
-* children - (optional) list of nested navigation tabs.
-
-### Including partial navigation
-
-You can create partial navigation, like `navigation-use-cases.yml` and `navigation-use-cases-no-children.yml`. Partials are included under `children` with:
-
-```
-children:
-  - include_nav: navigation-use-cases
-```
-
-### When to update navigation?
-
-When the content of the "Documentation" and "Use cases" collections have been changed, the navigation should be updated. It means that whenever:
-
-* the page (document in any collection) was: added, removed, renamed.
-* heading in the page was: added, removed, edited.
+The navigation sidebar is built in `_includes/collection_browser/navigation/_collection_toc.html`. Read more: see: [Navigation](#navigation)
 
 ## Markdown (md) > AsciiDoc (adoc) converter
 

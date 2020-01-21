@@ -5,7 +5,7 @@ category: testing-best-practices
 excerpt: >-
   Learn more about Terratest's `test_structure`.
 tags: ["testing-best-practices", "test_structure"]
-order: 410
+order: 210
 nav_title: Documentation
 nav_title_link: /docs/
 ---
@@ -23,4 +23,4 @@ each time you change a single line of code can be very slow.
 
 This is where Terratest's `test_structure` package comes in handy: it allows you to explicitly break up your tests into
 stages and to be able to disable any one of those stages simply by setting an environment variable. Check out the
-[terraform_packer_example_test.go](/test/terraform_packer_example_test.go) for working sample code.
+[terraform_packer_example_test.go]({{ site.baseurl}}/examples/tests/terraform-packer-example-test/) for working sample code.
