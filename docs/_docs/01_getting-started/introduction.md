@@ -47,43 +47,13 @@ This presentation was recorded at QCon San Francisco 2019: https://qconsf.com/.
 Slides to the video can be found here: [Slides: How to test infrastructure code](https://www.slideshare.net/brikis98/how-to-test-infrastructure-code-automated-testing-for-terraform-kubernetes-docker-packer-and-more){:target="\_blank"}.
 
 
-## Basic usage
-
-The basic usage pattern for writing automated tests with Terratest is to:
-
-1.  Write tests using Go's built-in [package testing](https://golang.org/pkg/testing/): you create a file ending in
-    `_test.go` and run tests with the `go test` command.
-1.  Use Terratest to execute your _real_ IaC tools (e.g., Terraform, Packer, etc.) to deploy _real_ infrastructure
-    (e.g., servers) in a _real_ environment (e.g., AWS).
-1.  Validate that the infrastructure works correctly in that environment by making HTTP requests, API calls, SSH
-    connections, etc.
-1.  Undeploy everything at the end of the test.
-
-Here's a simple example of how to test some Terraform code:
-
-```go
-terraformOptions := &terraform.Options {
-  // The path to where your Terraform code is located
-  TerraformDir: "../examples/terraform-basic-example",
-}
-
-// At the end of the test, run `terraform destroy` to clean up any resources that were created
-defer terraform.Destroy(t, terraformOptions)
-
-// This will run `terraform init` and `terraform apply` and fail the test if there are any errors
-terraform.InitAndApply(t, terraformOptions)
-
-// Validate your code works as expected
-validateServerIsWorking(t, terraformOptions)
-```
-
-<div class="cb-post-cta">
-  <span class="title">See how to start with Terratest</span>
-  <a class="btn btn-primary" href="{{site.baseurl}}/docs/getting-started/quick-start/">Quick Start</a>
-</div>
-
 ## Gruntwork
 
 Terratest was developed at [Gruntwork](https://gruntwork.io/) to help maintain the [Infrastructure as Code
 Library](https://gruntwork.io/infrastructure-as-code-library/), which contains over 300,000 lines of code written
 in Terraform, Go, Python, and Bash, and is used in production by hundreds of companies.
+
+<div class="cb-post-cta">
+  <span class="title">See how to start with Terratest</span>
+  <a class="btn btn-primary" href="{{site.baseurl}}/docs/getting-started/quick-start/">Quick Start</a>
+</div>

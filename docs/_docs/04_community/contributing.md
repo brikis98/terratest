@@ -1,7 +1,7 @@
 ---
 layout: collection-browser-doc
 title: Contributing
-category: Community
+category: community
 excerpt: >-
   Terratest is an open source project, and contributions from the community are very welcome!
 tags: ["contributing", "community"]

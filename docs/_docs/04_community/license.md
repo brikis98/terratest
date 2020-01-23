@@ -1,7 +1,7 @@
 ---
 layout: collection-browser-doc
 title: License
-category: Community
+category: community
 excerpt: >-
   This code is released under the Apache 2.0 License. Read more here.
 tags: ["license"]

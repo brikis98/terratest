@@ -22,16 +22,6 @@ variety of helper functions and patterns for common infrastructure testing tasks
 - Running shell commands
 - And much more
 
-For an introduction to Terratest, including unit tests, integration tests, end-to-end tests, dependency injection, test
-parallelism, retries, error handling, and static analysis, see the talk [Automated Testing for Terraform, Docker,
-Packer, Kubernetes, and More](https://www.infoq.com/presentations/automated-testing-terraform-docker-packer/) and the
-blog post [Open sourcing Terratest: a swiss army knife for testing infrastructure
-code](https://blog.gruntwork.io/open-sourcing-terratest-a-swiss-army-knife-for-testing-infrastructure-code-5d883336fcd5).
-
-Terratest was developed at [Gruntwork](https://gruntwork.io/) to help maintain the [Infrastructure as Code
-Library](https://gruntwork.io/infrastructure-as-code-library/), which contains over 300,000 lines of code written
-in Terraform, Go, Python, and Bash, and is used in production by hundreds of companies.
-
 Please see the following for more info:
 
 * [Terratest Website](https://terratest.gruntwork.io)

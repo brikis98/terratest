@@ -308,6 +308,16 @@
         color: #bbbdc0;
       }
     }
+
+    &.active {
+      .arrow-icon {
+        color: #5b4de5;
+      }
+
+      + a {
+        color: #5b4de5;
+      }
+    }
   }
 }
 
@@ -2167,6 +2177,7 @@ body .cb .cb-section-white {
   justify-content: center;
   align-items: center;
   margin: 80px 0;
+  margin-bottom: 10px;
 
   .title {
     font-weight: bold;

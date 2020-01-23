@@ -1,10 +1,4 @@
-const navExceptions = [
-  ['use-cases/keep-your-terraform-code-dry/', 'getting-started'],
-  ['use-cases/keep-your-remote-state-configuration-dry/', 'getting-started'],
-  ['use-cases/keep-your-cli-flags-dry/', 'getting-started'],
-  ['use-cases/execute-terraform-commands-on-multiple-modules-at-once/', 'getting-started'],
-  ['use-cases/work-with-multiple-aws-accounts/', 'getting-started']
-]
+const navExceptions = []
 
 $(document).ready(function () {
   $('#toc-toggle-open').on('click', function () {
@@ -58,8 +52,10 @@ $(document).ready(function () {
 // Expand / collpase on click
 function toggleNav(el) {
   if (el.hasClass('collapsed')) {
-    el.removeClass('collapsed')
-    el.siblings('ul').collapse('show')
+    if (!el.hasClass('no-children')) {
+      el.removeClass('collapsed')
+      el.siblings('ul').collapse('show')
+    }
   } else {
     el.addClass('collapsed')
     el.siblings('ul').collapse('hide')
@@ -76,8 +72,10 @@ const docSidebarInitialExpand = function () {
       $(nav).parents('ul').each(function(i, el) {
         $(el).collapse('show')
         $(el).siblings('span.nav-collapse-handler:not(.no-children)').removeClass('collapsed')
+        $(el).siblings('span.nav-collapse-handler').addClass('active')
       })
       $(nav).siblings('span.nav-collapse-handler:not(.no-children)').removeClass('collapsed')
+      $(nav).siblings('span.nav-collapse-handler').addClass('active')
       $(nav).siblings('ul').collapse('show')
     })
   }
@@ -90,9 +88,11 @@ function expandToByURL(url, parentFilter) {
     toc.find(selector).each(function(i, nav) {
       $(nav).siblings('ul').collapse("show")
       $(nav).siblings('span.nav-collapse-handler:not(.no-children)').removeClass('collapsed')
+      $(nav).siblings('span.nav-collapse-handler').addClass('active')
       $(nav).parents('ul').each(function(i, el) {
         $(el).collapse("show")
         $(el).siblings('span.nav-collapse-handler:not(.no-children)').removeClass('collapsed')
+        $(el).siblings('span.nav-collapse-handler').addClass('active')
       })
     })
   }

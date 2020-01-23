@@ -66,6 +66,7 @@ Let’s say you have the following (simplified) [Terraform](https://www.terrafor
 provider "aws" {
   region = "us-east-1"
 }
+
 resource "aws_instance" "web_server" {
   ami                    = "ami-43a15f3e" # Ubuntu 16.04
   instance_type          = "t2.micro"
@@ -77,6 +78,7 @@ resource "aws_instance" "web_server" {
               nohup busybox httpd -f -p 8080 &
               EOF  
 }
+
 # Allow the web app to receive requests on port 8080
 resource "aws_security_group" "web_server" {
   ingress {
@@ -86,6 +88,7 @@ resource "aws_security_group" "web_server" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 output "url" {
   value = "http://${aws_instance.web_server.public_ip}:8080"
 }
@@ -108,12 +111,16 @@ func TestWebServer(t *testing.T) {
     // The path to where your Terraform code is located
     TerraformDir: "../web-server",
   }
+
   // At the end of the test, run `terraform destroy`
   defer terraform.Destroy(t, terraformOptions)
+
   // Run `terraform init` and `terraform apply`
   terraform.InitAndApply(t, terraformOptions)
+
   // Run `terraform output` to get the value of an output variable
   url := terraform.Output(t, terraformOptions, "url")
+
   // Verify that we get back a 200 OK with the expected text. It
   // takes ~1 min for the Instance to boot, so retry a few times.
   status := 200
@@ -172,11 +179,13 @@ The Terraform code in example #1 shoved all the web server code into User Data, 
 const http = require('http');
 const hostname = '0.0.0.0';
 const port = 8080;
+
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   res.end('Hello World!\n');
 });
+
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
@@ -229,6 +238,7 @@ At the end of your build, you get a new AMI ID. Let’s update the Terraform cod
 provider "aws" {
   region = "us-east-1"
 }
+
 resource "aws_instance" "web_server" {
   ami                    = "${var.ami_id}"
   instance_type          = "t2.micro"
@@ -239,6 +249,7 @@ resource "aws_instance" "web_server" {
               nohup node /home/ubuntu/server.js &
               EOF  
 }
+
 # Allow the web app to receive requests on port 8080
 resource "aws_security_group" "web_server" {
   ingress {
@@ -248,9 +259,11 @@ resource "aws_security_group" "web_server" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 variable "ami_id" {
   description = "The ID of the AMI to deploy"
 }
+
 output "url" {
   value = "http://${aws_instance.web_server.public_ip}:8080"
 }
@@ -271,6 +284,7 @@ packerOptions := &packer.Options {
     // The path to where the Packer template is located
     Template: "../web-server/web-server.json",
 }
+
 // Build the AMI
 amiId := packer.BuildAmi(t, packerOptions)
 terraformOptions := &terraform.Options {
@@ -290,7 +304,7 @@ And that’s it! The rest of the test code is exactly the same. When you run `go
 The above is just a small taste of what you can do with [Terratest](https://github.com/gruntwork-io/terratest). To learn more:
 1. Check out the [examples]({{site.baseurl}}/examples/) and the corresponding automated tests for those examples for fully working (and tested!) sample code.
 1. Browse through the list of [Terratest packages]({{site.baseurl}}/docs/getting-started/packages-overview/) to get a sense of all the tools available in Terratest.
-Read our Testing Best Practices Guide.
+1. Read our [Testing Best Practices Guide]({{site.baseurl}}/docs/#testing-best-practices).
 1. Check out real-world examples of Terratest usage in our open source infrastructure modules: [Consul](https://github.com/hashicorp/terraform-aws-consul), [Vault](https://github.com/hashicorp/terraform-aws-vault), [Nomad](https://github.com/hashicorp/terraform-aws-nomad).
 
 Happy testing!

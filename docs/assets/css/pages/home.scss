@@ -98,6 +98,14 @@ body.index-page {
     }
   }
 
+  .link-to-test-with-terratest {
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
   .index-page__terratest-in-4-steps {
     h2 {
       max-width: 800px;
@@ -128,31 +136,50 @@ body.index-page {
             flex: 1;
             border-top: 1px dashed $gray-color-3;
             display: block;
-            margin-left: 15px;
-            margin-right: 15px;
+            margin-left: 0;
+            margin-right: 2px;
             margin-top: 15px;
+            max-width: calc(50% - 36px);
+          }
+          img {
+            margin-left: 5px;
+            margin-right: 5px;
           }
         }
 
         .text-wrapper {
           display: flex;
           flex-direction: column;
+          text-align: center;
+          padding-left: 5px;
+          padding-right: 5px;
         }
 
         label {
           font-size: $font-size-lg;
           font-weight: bold;
-          padding-right: 15px;
           max-width: 280px;
           line-height: 1.2;
+          min-height: 58px;
         }
         .desc {
           font-size: $font-size-sm;
-          padding-right: 15px;
           max-width: 280px;
         }
 
-        @media all and (max-width: 1060px) {
+        &:first-child {
+          .icon-wrapper {
+            justify-content: flex-end;
+          }
+        }
+
+        &:last-child {
+          .icon-wrapper {
+            justify-content: flex-start;
+          }
+        }
+
+        @media all and (max-width: 1100px) {
           min-width: 400px;
           margin-bottom: 20px;
 
@@ -165,8 +192,14 @@ body.index-page {
           .desc {
             max-width: 400px;
           }
+          .text-wrapper {
+            text-align: left;
+            label {
+              min-height: auto;
+            }
+          }
         }
-        @media all and (max-width: 1060px) {
+        @media all and (max-width: 1100px) {
           flex-direction: row;
           margin-bottom: 40px;
           .text-wrapper {
@@ -186,7 +219,7 @@ body.index-page {
         }
       }
 
-      @media all and (max-width: 1060px) {
+      @media all and (max-width: 1100px) {
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
@@ -411,8 +444,9 @@ body.index-page {
           cursor: pointer;
           label {
             line-height: 1;
-            font-weight: bold;
+            font-weight: normal;
             font-size: $font-size-xs;
+            color: $gray-color-3;
           }
           .filename {
             font-size: $font-size-xs;
@@ -422,11 +456,22 @@ body.index-page {
           &.active {
             border-bottom: 2px solid $primary-color-2;
             label {
+              font-weight: bold;
               color: $primary-color-2;
+            }
+            .filename {
+              color: $text-color;
             }
           }
           &:hover {
             opacity: 0.7;
+            border-bottom: 2px solid $primary-color-2;
+            label {
+              color: $primary-color-2;
+            }
+            .filename {
+              color: $text-color;
+            }
           }
         }
       }
@@ -458,9 +503,7 @@ body.index-page {
       }
 
       .description {
-        font-size: $font-size-xs;
-        column-count: 2;
-        text-align: justify;
+        display: none;
       }
 
       .test-with-terratest__learn-more {
@@ -807,7 +850,7 @@ body.index-page {
 
   .popup {
     display: none;
-    width: 200px;
+    width: 300px;
     background: #fff;
     box-shadow: $box-shadow-sm;
     color: $text-color;
@@ -827,7 +870,7 @@ body.index-page {
         font-size: $font-size-xxs;
         font-weight: bold;
       }
-      .text {
+      p, .text {
         font-size: $font-size-xxs;
         font-weight: normal;
       }
@@ -849,6 +892,14 @@ body.index-page {
       position: absolute;
       left: 50px;
       top: -30px;
+    }
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .code-popup-handler {
+    .popup {
+      width: 200px;
     }
   }
 }
