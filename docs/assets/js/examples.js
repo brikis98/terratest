@@ -2,25 +2,36 @@
 ---
 $(document).ready(function () {
 
-  const DEFAULT_EXAMPLE_ID = 'terraform'
-  const CODE_LINE_HEIGHT = 15
-  const CODE_BLOCK_PADDING = 16
+  const DEFAULT_EXAMPLE_ID = 'azure-basic'
+  const CODE_LINE_HEIGHT = 16
+  const CODE_BLOCK_PADDING = 10
+
   window.examples = {
-    tags: {}
+    tags: {},
+    nav: {}
   }
 
-  // Activate first example
-  openExample(DEFAULT_EXAMPLE_ID)
+  initExamplesNav()
 
-  // Open example when user clicks on tab
-  $('.navs .examples__nav-item').on('click', function() {
-    openExample($(this).data('id'))
+  $(window).resize($.debounce(250, function() {
+     buildExamplesNav()
+  }))
+
+  // Activate first example
+  $('.examples__container').each(function (i, ec) {
+    openExample($(ec).attr('id'), DEFAULT_EXAMPLE_ID)
+
+    // Open example when user clicks on tab
+    $('.navs').on('click', '.examples__nav-item:not(.static-link)', function() {
+      openExample($(ec).attr('id'), $(this).data('id'))
+      $('.navs__dropdown-menu').removeClass('active')
+    })
   })
 
   // Open example and scroll to examples section when user clicks on
   // tech in the header
-  $('.link-to-examples').on('click', function() {
-    openExample($(this).data('target'))
+  $('.link-to-test-with-terratest').on('click', function() {
+    openExample('index_page', $(this).data('target'))
     scrollToTests()
   })
 
@@ -36,12 +47,12 @@ $(document).ready(function () {
   })
 
   // Open dropdown of technologies to select
-  $('.examples__nav .nav-dropdown-btn, .examples__nav .current-nav').on('click', function() {
-    $('.examples__nav .navs').toggleClass('active')
+  $('.navs__dropdown-arrow').on('click', function() {
+    $('.navs__dropdown-menu').toggleClass('active')
   })
 
   // Open popup when user click on circle with the number
-  $('.index-page__examples').on('click', '.code-popup-handler', function() {
+  $('.examples__container').on('click', '.code-popup-handler', function() {
     const isActive = $(this).hasClass('active')
     $('.code-popup-handler').removeClass('active')
     if (!isActive) {
@@ -51,31 +62,34 @@ $(document).ready(function () {
 
   function scrollToTests() {
     $([document.documentElement, document.body]).animate({
-        scrollTop: $('#index-page__examples').offset().top
+        scrollTop: $('#index-page__test-with-terratest').offset().top
     }, 500)
   }
 
-  function openExample(target) {
+  function openExample(exampleContainerId, target) {
+    // Change active nav in window state and rebuild navigation first
+    const $ecId = $('#'+exampleContainerId)
+    window.examples.nav[exampleContainerId].current = target
+    buildExamplesNav()
+
     // Change active tab in navigation
-    $('.examples__nav-item').removeClass('active')
+    $ecId.find('.examples__nav-item').removeClass('active')
     const jTarget = $('.navs .examples__nav-item[data-id="'+target+'"]')
     jTarget.addClass('active')
 
     // Change the block below navigation (with code snippets)
-    $('.examples__block').removeClass('active')
-    $('#example__block-' + target).addClass('active')
+    $ecId.find('.examples__block').removeClass('active')
+    $ecId.find('#example__block-' + target).addClass('active')
 
     // Set current tab
-    $('.examples__nav .navs').removeClass('active')
-    $('.examples__nav .current-nav').html(jTarget.html())
+    $ecId.find('.examples__nav .navs').removeClass('active')
+
 
     loadCodeSnippet()
   }
 
   function loadCodeSnippet() {
-    console.log('x1', $('.examples__block.active .examples__code.active'))
     $('.examples__block.active .examples__code.active').each(async function (i, activeCodeSnippet) {
-      console.log('x2')
       const $activeCodeSnippet = $(activeCodeSnippet)
       const exampleTarget = $(this).data('example')
       const fileId = $(this).data('target')
@@ -95,16 +109,18 @@ $(document).ready(function () {
 
   function findTags(content, exampleTarget, fileId) {
     let tags = []
-    let regexpTags =  /data "(\w+)" "(\w+)" {/mg
+    // let regexpTags =  /data "(\w+)" "(\w+)" {/mg
+    let regexpTags = /website::tag::(\d)::(.*)/mg
     let match = regexpTags.exec(content)
     do {
-      console.log(`Hello ${match[1]}`)
-      tags.push({
-        text: match[0],
-        tag: match[1],
-        step: 0,
-        line: findLineNumber(content, match[0])
-      })
+      if (match && match.length > 0) {
+        tags.push({
+          text: match[2],
+          tag: match[0],
+          step: match[1],
+          line: findLineNumber(content, match[0])
+        })
+      }
     } while((match = regexpTags.exec(content)) !== null)
     window.examples.tags[exampleTarget] = {
       ...window.examples.tags[exampleTarget],
@@ -124,9 +140,6 @@ $(document).ready(function () {
     const activeCode = $('.examples__block.active .examples__code.active')
     const exampleTarget = activeCode.data('example')
     const fileId = activeCode.data('target')
-
-    console.log('tags', exampleTarget, fileId, window.examples.tags)
-    console.log('tags2', window.examples.tags[exampleTarget][fileId])
 
     window.examples.tags[exampleTarget][fileId].map( function(v,k) {
       const top = (CODE_LINE_HEIGHT * v.line) + CODE_BLOCK_PADDING;
@@ -154,6 +167,97 @@ $(document).ready(function () {
 
   function loadExampleDescription(name) {
     return $('#index-page__examples').find('#example__block-'+name+' .description').html()
+  }
+
+  function initExamplesNav() {
+    window.examples.nav = {}
+    $('.examples__container').each(function(eci, ec) {
+      $(ec).find('.examples__nav .hidden-navs').each(function(rni, refNavs) {
+        let navsArr = []
+        let currentNav
+        $(refNavs).find('.examples__nav-item').each( function(ni, nav) {
+          if ($(nav).hasClass('active')) {
+            currentNav = $(nav).data('id')
+          }
+          navsArr.push($(nav))
+        })
+        window.examples.nav = {
+          ...window.examples.nav,
+          [$(ec).attr('id')]: {
+            current: currentNav ? currentNav : DEFAULT_EXAMPLE_ID,
+            items: navsArr
+          }
+        }
+      })
+    })
+  }
+
+  function buildExamplesNav() {
+    $('.examples__container').each(function(eci, ec) {
+      const ecId = $(ec).attr('id')
+      const containerWidth = $(ec).width()
+      const NAV_WIDTH = 150
+      const ARROW_SLOT_WIDTH = 100
+
+      const noOfVisible = Math.floor((containerWidth - NAV_WIDTH - ARROW_SLOT_WIDTH) / 150)
+
+      const $visibleBar = $($(ec).find('.navs__visible-bar'))
+      const $dropdownInput = $($(ec).find('.navs__dropdown-input'))
+      const $dropdownMenu = $($(ec).find('.navs__dropdown-menu'))
+
+      $visibleBar.html('')
+      $dropdownInput.html('')
+      $dropdownMenu.html('')
+
+      let settingCurrent = false
+
+      // Build initial a navigation bar
+      if (window.examples.nav
+        && ecId in window.examples.nav
+        && window.examples.nav[ecId].items) {
+
+        // Visible elements
+        let breakSlice = noOfVisible > window.examples.nav[ecId].items.length ? window.examples.nav[ecId].items.length : noOfVisible
+        let visibleEls = window.examples.nav[ecId].items.slice(0, breakSlice)
+        let hiddenEls = window.examples.nav[ecId].items.slice(breakSlice, window.examples.nav[ecId].items.length)
+
+        let visibleNavIsActive = false
+        let hiddenNavIsActive = -1
+
+        if (window.examples.nav[ecId].current) {
+          visibleEls.map( function(x,i) {
+            if(x.data('id') === window.examples.nav[ecId].current) {
+              visibleNavIsActive = true
+              x.addClass('active')
+            }
+          })
+          hiddenEls.map( function(x,i) {
+            if(x.data('id') === window.examples.nav[ecId].current) {
+              hiddenNavIsActive = i
+              x.addClass('active')
+            }
+          })
+        }
+
+        visibleEls.map(function(nav,i) {
+          $visibleBar.append($(nav).clone())
+        })
+
+        if (hiddenNavIsActive > -1) {
+          const sliced = hiddenEls.splice(hiddenNavIsActive, 1)
+          $dropdownInput.append($(sliced[0]).clone())
+        } else {
+          $dropdownInput.append($(hiddenEls.shift()).clone())
+        }
+
+        hiddenEls.map(function(nav,i) {
+          $dropdownMenu.append($(nav).clone())
+        })
+
+        // Add static links
+        $dropdownMenu.append($(ec).find('.hidden-navs__static-links').html())
+      }
+    })
   }
 
 })

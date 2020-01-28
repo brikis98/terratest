@@ -6,9 +6,8 @@
       {% if file.default %}
         {% assign assign_class = 'active' %}
       {% endif %}
-      <div class="tab {{ assign_class }}" data-target="#example__code-{{ include.example.id }}-{{ file.id }}">
+      <div class="tab {{ assign_class }}" data-target="#example__code-{{ include.example.id }}-{{ file.name | replace: '.', '-' | replace: ' ', '-' }}">
         <label>{{ file.name }}</label>
-        <span class="filename">{{ file.path }}</span>
       </div>
     {% endfor %}
   </div>
@@ -19,16 +18,35 @@
       {% assign assign_class = 'active' %}
     {% endif %}
     <div
-      id="example__code-{{ include.example.id }}-{{ file.id }}"
+      id="example__code-{{ include.example.id }}-{{ file.name | replace: '.', '-' | replace: ' ', '-' }}"
       class="examples__code examples__code--example {{ assign_class }}"
       data-example="{{ include.example.id }}"
-      data-target="{{ file.id }}"
-      data-url="{{ file.url }}"
+      data-target="{{ file.name | replace: '.', '-' | replace: ' ', '-' }}"
+      data-url="{{ site.github_api_url }}{{ file.url }}"
       >
       <pre>
-<code class="language-{{ file.prism_lang }}">Loading... {{ file.id }} {{ include.example.id }}</code>
+<code class="language-{{ file.prism_lang }}">Loading...</code>
       </pre>
+      <div class="example__file-link">
+        <p>See source code:</p>
+        <a href="https://{{ site.repository }}/tree/master/{{ file.url }}">{{ site.repository }}{{ file.url }}</a>
+      </div>
     </div>
   {% endfor %}
+
+  {% if include.example.learn_more %}
+  <div class="examples__learn-more">
+    <span class="title">Learn more:</span>
+    <ul>
+      {% for link in include.example.learn_more %}
+        <li>
+          <a href='{{ link.url }}'>
+            {{ link.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 
 </div>

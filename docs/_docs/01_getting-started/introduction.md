@@ -2,6 +2,7 @@
 layout: collection-browser-doc
 title: Introduction
 category: getting-started
+toc: true
 excerpt: >-
   Terratest provides a variety of helper functions and patterns for common infrastructure testing tasks. Learn more about Terratest basic usage.
 tags: ["basic-usage"]

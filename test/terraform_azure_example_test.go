@@ -18,15 +18,16 @@ import (
 func TestTerraformAzureExample(t *testing.T) {
 	t.Parallel()
 
+	// website::tag::1::Configure Terraform setting up a path to Terraform code.
 	terraformOptions := &terraform.Options{
 		// The path to where our Terraform code is located
 		TerraformDir: "../examples/terraform-azure-example",
 	}
 
-	// At the end of the test, run `terraform destroy` to clean up any resources that were created
+	// website::tag::4::At the end of the test, run `terraform destroy` to clean up any resources that were created
 	defer terraform.Destroy(t, terraformOptions)
 
-	// This will run `terraform init` and `terraform apply` and fail the test if there are any errors
+	// website::tag::2::his will run `terraform init` and `terraform apply` and fail the test if there are any errors
 	terraform.InitAndApply(t, terraformOptions)
 
 	// Run `terraform output` to get the value of an output variable
@@ -37,6 +38,6 @@ func TestTerraformAzureExample(t *testing.T) {
 	actualVMSize := azure.GetSizeOfVirtualMachine(t, vmName, resourceGroupName, "")
 	expectedVMSize := compute.VirtualMachineSizeTypes("Standard_B1s")
 
-	// Test that the Virtual Machine size matches the Terraform specification
+	// website::tag::3::Test that the Virtual Machine size matches the Terraform specification
 	assert.Equal(t, expectedVMSize, actualVMSize)
 }

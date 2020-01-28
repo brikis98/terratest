@@ -8,83 +8,49 @@
     align-items: stretch;
     border-bottom: 1px solid $gray-color-1;
 
-    .current-nav {
+    .hidden-navs, .hidden-navs__static-links {
       display: none;
-      padding: 10px 30px;
-      img {
-        max-height: 45px;
-      }
-    }
-
-    .nav-dropdown-btn {
-      display: none;
-      background: transparent;
-      border-width:0;
-      box-shadow: none;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      width: 100px;
-      padding: 10px;
-      border-right: 1px solid $gray-color-1;
-      span {
-        opacity: 0.2;
-      }
     }
 
     .navs {
       display: flex;
       align-items: stretch;
       width: 100%;
+      position: relative;
+
       .examples__nav-item {
         flex: 1;
         height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 10px;
-        max-width: 180px;
+        flex-direction: column;
+        padding: 5px;
+        max-width: 200px;
+        min-width: 100px;
         border-bottom: 2px solid #fff;
-        max-height: 65px;
+        max-height: 100px;
         cursor: pointer;
 
-        &.nav-aws {
-          max-width: 90px;
-          padding-top: 20px;
-          img {
-            max-width: 50px;
-            margin: auto;
-          }
+        img {
+          max-width: 120px;
+          max-height: 80px;
+          margin-bottom: 5px;
         }
-        &.nav-gcp {
-          min-width: 220px;
-        }
-        &.nav-azure {
-          max-width: 100px;
-        }
-        &.nav-terraform {
-          img {
-            max-width: 120px;
-          }
-        }
-        &.nav-packer {
-          img {
-            max-width: 110px;
-          }
-        }
-        &.nav-docker {
-          img {
-            max-width: 110px;
-          }
-        }
-        &.nav-kubernetes {
-          img {
-            max-width: 130px;
-          }
+
+        .name {
+          font-size: $font-size-xxs;
+          font-weight: bold;
+          color: $gray-color-2;
+          text-transform: uppercase;
+          letter-spacing: 0.2px;
         }
 
         &.active {
           border-bottom: 2px solid $primary-color-2;
+          .name {
+            color: $primary-color-2;
+          }
         }
 
         &:not(.active) {
@@ -92,10 +58,15 @@
             -webkit-filter: grayscale(100%);
             filter: grayscale(100%);
             opacity: 0.25;
-            &:hover {
+          }
+          &:hover {
+            img {
               opacity: 1;
               -webkit-filter: grayscale(0%);
               filter: grayscale(0%);
+            }
+            .name {
+              color: $primary-color-2;
             }
           }
         }
@@ -104,86 +75,64 @@
           width: 100%;
         }
       }
-    }
-  }
 
-  @media all and (max-width: 991px) {
-    .examples__nav {
-      display: flex;
-      align-items: stretch;
-      border-bottom: 1px solid $gray-color-1;
-      position: relative;
-      max-height: 65px;
-
-      .current-nav {
-        display: block;
+      .navs__visible-bar {
         flex: 1;
-        max-width: 100%;
-        img {
-          max-width: 100%;
-        }
-      }
-
-      .nav-dropdown-btn {
         display: flex;
-        img {
-          display: none;
-        }
+        align-items: stretch;
       }
 
-      .navs {
-        display: none;
+      .navs__dropdown-input {
+        width: 150px;
+      }
+
+      .navs__dropdown-arrow {
+        width: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .navs__dropdown-menu {
         position: absolute;
+        top: 80px;
+        right: 0px;
+        display: none;
+        min-width: 260px;
         width: 100%;
-        min-height: 65px;
-        top: 66px;
-        z-index: 5;
-        flex-wrap: wrap;
+        max-width: 400px;
+        border: 1px solid $gray-color-1;
+        border-radius: 4px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        box-shadow: $box-shadow-sm;
+        background: #fff;
 
         .examples__nav-item {
-          min-width: 100px;
+          padding: 20px 10px;
+          width: 100%;
+          max-width: 100%;
+          border-bottom: 1px solid $gray-color-1;
+          &:last-child {
+            border-width: 0px;
+          }
         }
 
         &.active {
           display: flex;
-          background: #fff;
-          box-shadow: $box-shadow-sm;
+          z-index: 1;
         }
       }
-    }
-  }
 
-  @media all and (max-width: 500px) {
-    .examples__nav {
-      .nav-dropdown-btn {
-        width: 40px;
-        span {
+      @media all and (max-width: 439px) {
+        .navs__visible-bar {
           display: none;
         }
-        img {
-          width: 10px;
-          display: block;
-        }
-      }
-      .navs {
-        flex-direction: column;
-        .examples__nav-item {
-          min-width: 100%;
-          padding-top: 20px;
-          padding-bottom: 20px;
-          img {
-            max-height: 65px;
-          }
-          &.nav-gcp {
-            min-width: 100%;
-            img {
-              max-width: 200px;
-            }
-          }
-          &.nav-azure {
-            img {
-              max-width: 80px;
-            }
+        .navs__dropdown-input {
+          width: 100%;
+          .examples__nav-item {
+            max-width: 100%;
           }
         }
       }
@@ -201,17 +150,17 @@
       display: flex;
       margin-top: 30px;
       .tab {
-        min-width: 200px;
+        min-width: 50px;
         display: flex;
         flex-direction: column;
         border: 1px solid $gray-color-1;
         border-bottom: 2px solid $gray-color-1;
-        padding: 5px;
+        padding: 10px 15px;
         cursor: pointer;
         label {
           line-height: 1;
           font-weight: normal;
-          font-size: $font-size-xs;
+          font-size: $font-size-xxs;
           color: $gray-color-3;
         }
         .filename {
@@ -265,6 +214,21 @@
 
       &.active {
         display: block;
+      }
+    }
+
+    .example__file-link {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      font-size: $font-size-xs;
+      word-break: break-all;
+      p {
+        margin-bottom: 4px;
+        font-weight: bold;
+      }
+
+      @media all and (max-width: 768px) {
+        font-size: 12px;
       }
     }
 
@@ -324,6 +288,184 @@
     .examples__block  {
       .description {
         column-count: 1;
+      }
+    }
+  }
+}
+
+.code-popup-handler {
+  position: absolute;
+  right: 0px;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  margin-right: -15px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-family: 'Source Sans Pro', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $secondary-gradient-start-color;
+  background: -webkit-linear-gradient(-45deg, $secondary-gradient-start-color, $secondary-gradient-stop-color);
+  background: linear-gradient(135deg, $secondary-gradient-start-color, $secondary-gradient-stop-color);
+  cursor: pointer;
+  z-index: 1;
+
+  .shadow-bg-1 {
+    z-index: -1;
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    opacity: 0.2;
+    top: 50%;
+    margin-top: -19px;
+    left: 50%;
+    margin-left: -19px;
+    background: #068ee4;
+    border-radius: 50%;
+  }
+
+  .shadow-bg-2 {
+    z-index: -2;
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    opacity: 0.2;
+    top: 50%;
+    margin-top: -23px;
+    left: 50%;
+    margin-left: -23px;
+    background: #068ee4;
+    border-radius: 50%;
+  }
+
+  &:hover {
+    .shadow-bg-1, .shadow-bg-2 {
+      opacity: 0.28;
+    }
+  }
+
+  .popup {
+    display: none;
+    width: 300px;
+    background: #fff;
+    box-shadow: $box-shadow-sm;
+    color: $text-color;
+    align-items: stretch;
+    border-radius: 4px;
+    .left-border {
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      width: 4px;
+      min-width: 4px;
+      background: $secondary-gradient-start-color;
+      background: -webkit-linear-gradient(90deg, $secondary-gradient-start-color, $secondary-gradient-stop-color);
+      background: linear-gradient(180deg, $secondary-gradient-start-color, $secondary-gradient-stop-color);
+    }
+    .content {
+      padding: 5px;
+      .title {
+        font-size: $font-size-xxs;
+        font-weight: bold;
+      }
+      p, .text {
+        font-size: $font-size-xxs;
+        font-weight: normal;
+      }
+    }
+  }
+
+  &.active {
+    transform: scale(1.2);
+    background: $primary-gradient-start-color;
+    background: -webkit-linear-gradient(0deg, $primary-gradient-start-color, $primary-gradient-stop-color);
+    background: linear-gradient(90deg, $primary-gradient-start-color, $primary-gradient-stop-color);
+
+    .shadow-bg-1, .shadow-bg-2 {
+      display: none;
+    }
+
+    .popup {
+      display: flex;
+      position: absolute;
+      left: 50px;
+      top: -10px;
+    }
+  }
+}
+
+@media all and (max-width: 1200px) {
+  .code-popup-handler {
+    .popup {
+      width: 200px;
+    }
+  }
+}
+
+@media all and (max-width: 800px) {
+  .code-popup-handler {
+    margin-right: 0;
+    right: 5px;
+
+    &.active {
+      .popup {
+        left: -220px;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 350px) {
+  .code-popup-handler {
+    margin-right: 0;
+    right: 3px;
+
+    &.active {
+      .popup {
+        width: 180px;
+        left: -182px;
+      }
+    }
+  }
+}
+
+.examples__container.wide {
+  .examples__block {
+    .examples__code {
+      width: 100%;
+    }
+  }
+
+  .code-popup-handler {
+    .popup {
+      left: 40px;
+      width: 280px;
+    }
+
+    @media all and (max-width: 1600px) {
+      .popup {
+        width: 220px;
+      }
+    }
+
+    @media all and (max-width: 1450px) {
+      .popup {
+        width: 180px;
+      }
+    }
+
+    @media all and (max-width: 1366px) {
+      .popup {
+        width: 280px;
+        right: 40px;
+        left: auto;
+      }
+    }
+
+    @media all and (max-width: 400px) {
+      .popup {
+        width: 200px;
       }
     }
   }

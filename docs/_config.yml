@@ -33,6 +33,8 @@ repository: "github.com/gruntwork-io/terratest"
 twitter_username: https://twitter.com/gruntwork_io
 github_username:  https://github.com/gruntwork-io
 
+github_api_url: https://api.github.com/repos/altalogy/terratest/contents
+
 # Build settings
 # theme: minima
 assets_base_url: '/assets/'
