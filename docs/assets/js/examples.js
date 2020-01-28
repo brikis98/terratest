@@ -2,7 +2,7 @@
 ---
 $(document).ready(function () {
 
-  const DEFAULT_EXAMPLE_ID = 'azure-basic'
+  const DEFAULT_EXAMPLE_ID = 'terraform-http-basic'
   const CODE_LINE_HEIGHT = 16
   const CODE_BLOCK_PADDING = 10
 
@@ -122,10 +122,11 @@ $(document).ready(function () {
         })
       }
     } while((match = regexpTags.exec(content)) !== null)
-    window.examples.tags[exampleTarget] = {
-      ...window.examples.tags[exampleTarget],
-      [fileId]: tags
-    }
+    window.examples.tags[exampleTarget] = Object.assign({
+        [fileId]: tags
+      },
+      window.examples.tags[exampleTarget]
+    )
   }
 
   function findLineNumber(content, text) {
@@ -181,13 +182,12 @@ $(document).ready(function () {
           }
           navsArr.push($(nav))
         })
-        window.examples.nav = {
-          ...window.examples.nav,
+        window.examples.nav = Object.assign({
           [$(ec).attr('id')]: {
             current: currentNav ? currentNav : DEFAULT_EXAMPLE_ID,
             items: navsArr
           }
-        }
+        }, window.examples.nav)
       })
     })
   }

@@ -70,7 +70,7 @@ func TestPackerBasicExample(t *testing.T) {
 	assert.NotContains(t, accountsWithLaunchPermissions, randomAccount)
 	assert.Contains(t, accountsWithLaunchPermissions, requestingAccount)
 
-	// website::tag::4::Check AMI's properties.
+	// website::tag::3::Check AMI's properties.
 	// Check if AMI is public
 	MakeAmiPublic(t, amiID, ec2Client)
 	amiIsPublic := terratest_aws.GetAmiPubliclyAccessible(t, awsRegion, amiID)

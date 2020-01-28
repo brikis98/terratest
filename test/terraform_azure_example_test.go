@@ -27,7 +27,7 @@ func TestTerraformAzureExample(t *testing.T) {
 	// website::tag::4::At the end of the test, run `terraform destroy` to clean up any resources that were created
 	defer terraform.Destroy(t, terraformOptions)
 
-	// website::tag::2::his will run `terraform init` and `terraform apply` and fail the test if there are any errors
+	// website::tag::2::This will run `terraform init` and `terraform apply` and fail the test if there are any errors
 	terraform.InitAndApply(t, terraformOptions)
 
 	// Run `terraform output` to get the value of an output variable

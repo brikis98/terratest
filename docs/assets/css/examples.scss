@@ -372,6 +372,7 @@
       p, .text {
         font-size: $font-size-xxs;
         font-weight: normal;
+        margin-bottom: 0;
       }
     }
   }
@@ -390,7 +391,7 @@
       display: flex;
       position: absolute;
       left: 50px;
-      top: -10px;
+      top: 0;
     }
   }
 }
