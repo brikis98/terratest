@@ -57,23 +57,11 @@ whitelist:
 
 include: ['_pages']
 
-permalink: '/blog/:title'
-
 collections:
-  examples:
-    output: true
-    sort_by: order
-    permalink: '/:collection/:categories/:title/'
   docs:
     output: true
     sort_by: order
     permalink: /:collection/:categories/:title/
-
-has_nested_collections_as_categories:
-  docs:
-    - category_name: examples
-      collection_index_page: '/examples'
-
 
 # Exclude from processing.
 # The following items will not be processed, by default.
