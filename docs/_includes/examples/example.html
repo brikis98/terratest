@@ -1,0 +1,34 @@
+<div id="example__block-{{ include.example.id }}" class="examples__block active" data-target="{{ include.example.id }}">
+
+  <div class="examples__tabs" data-target="{{ include.example.id }}">
+    {% for file in include.example.files %}
+      {% assign assign_class = '' %}
+      {% if file.default %}
+        {% assign assign_class = 'active' %}
+      {% endif %}
+      <div class="tab {{ assign_class }}" data-target="#example__code-{{ include.example.id }}-{{ file.id }}">
+        <label>{{ file.name }}</label>
+        <span class="filename">{{ file.path }}</span>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% for file in include.example.files %}
+    {% assign assign_class = '' %}
+    {% if file.default %}
+      {% assign assign_class = 'active' %}
+    {% endif %}
+    <div
+      id="example__code-{{ include.example.id }}-{{ file.id }}"
+      class="examples__code examples__code--example {{ assign_class }}"
+      data-example="{{ include.example.id }}"
+      data-target="{{ file.id }}"
+      data-url="{{ file.url }}"
+      >
+      <pre>
+<code class="language-{{ file.prism_lang }}">Loading... {{ file.id }} {{ include.example.id }}</code>
+      </pre>
+    </div>
+  {% endfor %}
+
+</div>

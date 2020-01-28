@@ -1,0 +1,30 @@
+<div class="examples__container">
+  <nav class="examples__nav">
+    <div class="navs">
+      {% for example in site.data.examples %}
+        <div
+          class="examples__nav-item nav-{{ example.id }}"
+          data-id="{{ example.id }}"
+          data-name="{{ example.name }}"
+          data-url="{{ example.url }}"
+          >
+          <img src="{{ site.baseurl }}/{{ example.image }}" alt="{{ example.name }}" />
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="nav-dropdown-btn">
+      <span>Change:</span>
+      <img src="{{ site.baseurl }}/assets/img/icons/menu-dots-icon.png" alt="o" />
+    </div>
+    <div class="current-nav">
+      <img src="{{ site.baseurl }}/assets/img/logos/terraform-logo.png" alt="terraform" />
+    </div>
+  </nav>
+
+  {% for example in site.data.examples %}
+    {% include examples/example.html example=example %}
+  {% endfor %}
+
+
+</div>

@@ -1,0 +1,62 @@
+- id: terraform
+  name: Terraform
+  image: /assets/img/logos/terraform-logo.png
+  files:
+    - name: output.tf
+      path: yyas
+      id: output-tf
+      url: https://api.github.com/repos/gruntwork-io/terratest/contents/examples/terraform-basic-example/main.tf
+      prism_lang: hcl
+    - name: main.tf
+      path: xxx
+      id: main-tf
+      url: https://api.github.com/repos/gruntwork-io/terratest/contents/examples/terraform-basic-example/main.tf
+      prism_lang: hcl
+      default: true
+    - name: test.go
+      path: yyy
+      id: test-go
+      url: https://api.github.com/repos/gruntwork-io/terratest/contents/examples/terraform-basic-example/main.tf
+      prism_lang: go
+
+- id: packer
+  name: Packer
+  image: /assets/img/logos/packer-logo.png
+  url: http://abc.com
+  files:
+    - name: main2.tf
+      path: xxx2
+      id: main2-tf
+      url: https://api.github.com/repos/gruntwork-io/terratest/contents/examples/terraform-basic-example/main.tf
+      prism_lang: hcl
+      default: true
+    - name: test2.go
+      path: yyy2
+      id: test2-go
+      url: https://api.github.com/repos/gruntwork-io/terratest/contents/examples/terraform-basic-example/main.tf
+      prism_lang: go
+
+- id: docker
+  name: Docker
+  image: /assets/img/logos/docker-logo.png
+  url: http://abc.com
+
+- id: kubernetes
+  name: Kubernetes
+  image: /assets/img/logos/kubernetes-logo.png
+  url: http://abc.com
+
+- id: aws
+  name: AWS
+  image: /assets/img/logos/aws-logo.png
+  url: http://abc.com
+
+- id: gcp
+  name: GCP
+  image: /assets/img/logos/gcp-logo.png
+  url: http://abc.com
+
+- id: azure
+  name: Azure
+  image: /assets/img/logos/azure-logo.png
+  url: http://abc.com

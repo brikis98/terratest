@@ -34,6 +34,7 @@ func TestPackerBasicExample(t *testing.T) {
 	// Pick a random AWS region to test in. This helps ensure your code works in all regions.
 	awsRegion := terratest_aws.GetRandomStableRegion(t, nil, nil)
 
+	// website::tag::1::Read Packer's template and set AWS Region variable.
 	packerOptions := &packer.Options{
 		// The path to where the Packer template is located
 		Template: "../examples/packer-basic-example/build.json",
@@ -52,9 +53,11 @@ func TestPackerBasicExample(t *testing.T) {
 		MaxRetries:         DefaultMaxPackerRetries,
 	}
 
+	// website::tag::2::Build artifacts from Packer's template.
 	// Make sure the Packer build completes successfully
 	amiID := packer.BuildArtifact(t, packerOptions)
 
+	// website::tag::4::Remove AMI after test.
 	// Clean up the AMI after we're done
 	defer terratest_aws.DeleteAmiAndAllSnapshots(t, awsRegion, amiID)
 
@@ -67,6 +70,7 @@ func TestPackerBasicExample(t *testing.T) {
 	assert.NotContains(t, accountsWithLaunchPermissions, randomAccount)
 	assert.Contains(t, accountsWithLaunchPermissions, requestingAccount)
 
+	// website::tag::4::Check AMI's properties.
 	// Check if AMI is public
 	MakeAmiPublic(t, amiID, ec2Client)
 	amiIsPublic := terratest_aws.GetAmiPubliclyAccessible(t, awsRegion, amiID)
