@@ -62,7 +62,7 @@ To make this sort of testing easier, Terratest provides a variety of helper func
 ## Example #1: Terraform
 Let’s say you have the following (simplified) [Terraform](https://www.terraform.io/) code to deploy a web server in AWS (if you’re new to Terraform, check out our [Comprehensive Guide to Terraform](https://blog.gruntwork.io/a-comprehensive-guide-to-terraform-b3d32832baca)):
 
-```go
+```hcl
 provider "aws" {
   region = "us-east-1"
 }
@@ -133,7 +133,7 @@ func TestWebServer(t *testing.T) {
 
 The code above does all the steps we mentioned above, including running `terraform init`, `terraform apply`, making HTTP requests to the web server (retrying up to 15 times with 5 seconds between retries), and running `terraform destroy` (using [`defer`](https://blog.golang.org/defer-panic-and-recover) to run it at the end of the test, whether the test succeeds or fails). If you put this code in a file called `web_server_test.go`, you can run it by executing `go test`, and you’ll see output that looks like this (truncated for readability):
 
-```bash
+```
 $ go test -v
 === RUN   TestWebServer
 Running command terraform with args [init]
@@ -219,7 +219,7 @@ How can you run this Node.js app on an EC2 Instance? One option is to use [Packe
 
 If you put the code above into `web-server.json`, you can create an AMI by running `packer build web-server.json`:
 
-```bash
+```
 $ packer build web-server.json
 ==> amazon-ebs: Prevalidating AMI Name...
 ==> amazon-ebs: Creating temporary security group for instance...

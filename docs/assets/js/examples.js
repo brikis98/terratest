@@ -2,7 +2,6 @@
 ---
 $(document).ready(function () {
 
-  const DEFAULT_EXAMPLE_ID = 'terraform-http-basic'
   const CODE_LINE_HEIGHT = 16
   const CODE_BLOCK_PADDING = 10
 
@@ -19,7 +18,10 @@ $(document).ready(function () {
 
   // Activate first example
   $('.examples__container').each(function (i, ec) {
-    openExample($(ec).attr('id'), DEFAULT_EXAMPLE_ID)
+    // Find first element:
+    const firstElementId = $(ec).find('.examples__nav-item').data('id')
+    // Open first element:
+    openExample($(ec).attr('id'), firstElementId)
 
     // Open example when user clicks on tab
     $('.navs').on('click', '.examples__nav-item:not(.static-link)', function() {
@@ -84,7 +86,6 @@ $(document).ready(function () {
     // Set current tab
     $ecId.find('.examples__nav .navs').removeClass('active')
 
-
     loadCodeSnippet()
   }
 
@@ -94,13 +95,17 @@ $(document).ready(function () {
       const exampleTarget = $(this).data('example')
       const fileId = $(this).data('target')
       if (!$activeCodeSnippet.data('loaded')) {
-        const response = await fetch($activeCodeSnippet.data('url'))
-        const json = await response.json()
-        $activeCodeSnippet.attr('data-loaded', true)
-        const content = atob(json.content)
-        findTags(content, exampleTarget, fileId)
-        $activeCodeSnippet.find('code').html(content)
-        Prism.highlightAll()
+        try {
+          const response = await fetch($activeCodeSnippet.data('url'))
+          const content = await response.text()
+          $activeCodeSnippet.attr('data-loaded', true)
+          findTags(content, exampleTarget, fileId)
+          $activeCodeSnippet.find('code').text(content)
+          Prism.highlightAll()
+        } catch(err) {
+          $activeCodeSnippet.find('code').text('Resource could not be loaded.')
+          console.error(err)
+        }
       }
       updatePopups()
       openPopup(exampleTarget, 1)
@@ -109,8 +114,7 @@ $(document).ready(function () {
 
   function findTags(content, exampleTarget, fileId) {
     let tags = []
-    // let regexpTags =  /data "(\w+)" "(\w+)" {/mg
-    let regexpTags = /website::tag::(\d)::(.*)/mg
+    let regexpTags = /website::tag::(\d)::\s*(.*)/mg
     let match = regexpTags.exec(content)
     do {
       if (match && match.length > 0) {
@@ -184,7 +188,7 @@ $(document).ready(function () {
         })
         window.examples.nav = Object.assign({
           [$(ec).attr('id')]: {
-            current: currentNav ? currentNav : DEFAULT_EXAMPLE_ID,
+            current: currentNav,
             items: navsArr
           }
         }, window.examples.nav)

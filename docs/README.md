@@ -39,6 +39,8 @@ Clone or fork Terratest [repository](https://github.com/gruntwork-io/terratest).
     bundle exec jekyll serve
     ```
 
+6. Open [http://localhost:4000/terratest/](http://localhost:4000/terratest/) in your web browser.
+
 # Deployment
 
 GitHub Pages automatically rebuilds the website from the `/docs` folder whenever you commit and push changes to the `master`
@@ -79,8 +81,8 @@ categories:
 excerpt: Learn how to work with Terratest.      # <--- Change page description
 tags: ["Quick Start", "DRY", "backend", "CLI"]  # <--- Set tags
 order: 100                                      # <--- It sorts the docs on the list
-nav_title: Documentation
-nav_title_link: /docs/
+nav_title: Documentation                        # X Cannot be changed
+nav_title_link: /docs/                          # X Cannot be changed
 ---
 
 ```
